@@ -51,92 +51,92 @@
   {
     "id": "B01",
     "name": "Nền cát vàng",
-    "status": "prototype",
-    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 0
   },
   {
     "id": "B02",
     "name": "Nền sỏi",
-    "status": "prototype",
-    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 0
   },
   {
     "id": "B03",
     "name": "Đá nhỏ (3 mẫu)",
-    "status": "prototype",
-    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B04",
     "name": "Đá lớn (2 mẫu)",
-    "status": "prototype",
-    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 3
   },
   {
     "id": "B05",
     "name": "Cụm đá khe trú",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 3
   },
   {
     "id": "B06",
     "name": "Lũa thấp",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B07",
     "name": "Lũa phân nhánh",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B08",
     "name": "Hang đá",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 3
   },
   {
     "id": "B09",
     "name": "Cây thấp (2 mẫu)",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B10",
     "name": "Cây cao (2 mẫu)",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B11",
     "name": "Thảm cỏ",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B12",
     "name": "Rêu bám",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 2
   },
   {
     "id": "B13",
     "name": "Bình gốm nghiêng",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
     "cycle": 3
   },
   {

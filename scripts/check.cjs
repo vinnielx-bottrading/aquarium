@@ -10,3 +10,12 @@ const data=JSON.parse(fs.readFileSync(path.join(pub,'data.json')));assert.equal(
 const game=fs.readFileSync(path.join(pub,'game.js'),'utf8');for(const m of game.matchAll(/assets\/[^'"\s]+\.png/g))assert(fs.existsSync(path.join(pub,m[0])),`missing ${m[0]}`);
 assert(!game.includes('data:image/'));assert(game.includes('drawTurn(f,y)'));assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).outputDirectory,'public');
 console.log('PASS: JavaScript, sprite frame bounds, atlas dimensions, static links, game images, unique asset IDs and Vercel output.');
+const vm=require('node:vm');const items=vm.runInNewContext(fs.readFileSync(path.join(pub,'decor-data.js'),'utf8')+';DECOR_ITEMS');
+assert.equal(items.length,16,'Group B needs 16 placeable decorations plus 2 substrates');
+assert.equal(new Set(items.map(x=>x.id)).size,16);
+for(const item of items){assert(fs.existsSync(path.join(pub,item.src)),item.id);assert(item.ratio>0);assert(['rock','wood','plant','pot'].includes(item.category));if(item.crop)assert(item.crop.length===4&&item.crop.every(Number.isFinite));}
+const decor=fs.readFileSync(path.join(pub,'decor.js'),'utf8');const constrain=decor.match(/function constrainDecor\(o\)\{[^\n]+/)[0];
+const context=vm.createContext({L:130,R:1370,DX:100});vm.runInContext('const dcClamp=(v,a,b)=>Math.max(a,Math.min(b,v));'+constrain,context);
+for(const item of items)for(const x of [-1000,800,3000])for(const y of [100,660,900]){context.input={type:item.id,x,y,width:item.width};const o=vm.runInContext('constrainDecor(input)',context);assert(o.y>=430&&o.y<=694);assert(o.x-o.width/2>=130);assert(o.x+o.width/2<=1470);}
+assert.equal(data.filter(x=>/^B\d\d$/.test(x.id)&&x.status==='ready').length,13);
+console.log('PASS: all 13 Group B entries, 16 unique decorations, files, crop metadata and placement bounds.');

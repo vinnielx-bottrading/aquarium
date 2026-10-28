@@ -1,23 +1,21 @@
-# Aquarium v12 — Trang trí & bơi tự do
+# Aquarium v13 — Hoàn thiện asset nhóm B
 
-Chỉ hai loài: Ngọc Lam và Đuôi Nắng. Không bổ sung loài mới.
+Giữ nguyên hai loài cá Ngọc Lam và Đuôi Nắng, bộ sprite và bơi ngẫu nhiên của v12.
 
-## Chơi
-`npm start`, mở http://localhost:3000. `npm test` kiểm tra; `npm run build` dùng trên Vercel. Không cần dependency. Cấu hình Vercel giữ: Other / npm run build / public.
+## Chơi và trang trí
+`npm start` rồi mở http://localhost:3000. Không cần cài dependency.
+Mở **Trang trí hồ** ở góc trái. Chọn loại vật phẩm, chọn mẫu rồi chạm gần đáy hồ hoặc kéo thả. Giữ khay mở để chọn và kéo đồ đã đặt. Có đổi kích thước, lật ngang, thu hồi và hoàn tác. Bố cục tự lưu trên trình duyệt này, giữ tương thích bố cục v12. Tối đa 24 vật.
 
-- Bấm **Trang trí hồ** ở góc trái để mở khay. Chọn một trong 5 đá rồi chạm gần đáy hồ hoặc kéo từ khay vào hồ.
-- Giữ khay mở để chọn/kéo vật đã đặt, đổi kích thước, Thu hồi, Hoàn tác. Có cát/sỏi; tối đa 24 vật.
-- Vật được giới hạn trên mặt đáy có phối cảnh; hiển thị trước/sau cá theo độ sâu.
-- Bố cục và nền tự lưu trong localStorage của trình duyệt. Không đồng bộ thiết bị. Làm lại xóa bố cục; có thể Hoàn tác trong phiên.
-- Cá tự chọn mục tiêu và nhịp bơi: bơi thường, nhanh ngắn, lên, xuống, dừng 1–4 giây; đổi hướng giữa hồ. Tốc độ và tư thế chuyển mềm, vây chậm lại khi nghỉ. Cá không có mô phỏng va chạm với đá; có thể giao nhau khi khác lớp chiều sâu.
+Nhóm B gồm 13 hạng mục, 18 PNG: cát, sỏi; 3 đá nhỏ; 2 đá lớn; cụm đá khe trú; lũa thấp; lũa phân nhánh; hang đá; 2 cây thấp; 2 cây cao; thảm cỏ; rêu; bình gốm nghiêng. Rêu được đặt cao hơn mặt nền để phủ đá/lũa, nhưng không tự gắn hoặc di chuyển theo vật bên dưới.
 
-## Asset và bối cảnh
-Danh mục tại public/progress.html và public/data.json. Nhóm đá B03/B04 đã dùng được để trang trí. Chưa có cây/lũa/hang. Cảnh trong nhà có ảnh; rừng/núi/đại dương/Everest vẫn là phác thảo Canvas, chưa phải ảnh nền hoàn chỉnh.
+## Phạm vi hoàn thiện
+Toàn bộ B01–B13 có tài nguyên và đã tích hợp, mở sẵn để trang trí. Lịch chu kỳ vẫn là kế hoạch, chưa khóa vật phẩm bằng thời gian. Cây, rêu và đồ trang trí dùng sprite tĩnh. Hang/khe đá chưa điều khiển hành vi trú ẩn; cá chưa tránh vật cản. Chỉ cảnh trong nhà có ảnh nền hoàn chỉnh; bốn cảnh ngoài trời vẫn là bản vẽ Canvas.
+
+Danh mục: public/progress.html. Danh sách chính xác và vùng crop khi vẽ: docs/GROUP_B_MANIFEST.json. Các ảnh gốc vẫn giữ nguyên; vùng crop không sửa nội dung PNG. Prompt sản xuất: docs/GROUP_B_PROMPTS.md. Nguồn asset cũ và lịch sử được giữ trong archive/.
 
 ## GitHub / Vercel
-Giải nén rồi đưa nội dung thư mục có package.json lên repo. Không upload nguyên ZIP để deploy. Import repo trên Vercel: Framework Other, Build npm run build, Output public. Không cần API key. Hướng dẫn GitHub chi tiết được giữ tại docs/README_v11.md. Chưa deploy lên Vercel thực tế.
+Giải nén, đưa nội dung thư mục có package.json lên GitHub (không đưa nguyên ZIP). Import repository vào Vercel, chọn Other, Build `npm run build`, Output `public`. Không cần API key. Chưa triển khai lên tài khoản Vercel của bạn. Hướng dẫn chi tiết được giữ ở docs/README_v11.md.
 
-## Kiểm tra
-120.000 bước mô phỏng có seed ở 40%, 70%, 100% nước; đủ 5 trạng thái, đổi hướng giữa hồ, không vượt biên. Chrome: đặt đá, kéo và tải lại vẫn giữ bố cục. Chưa kiểm tra thiết bị cảm ứng thật.
+`npm test` kiểm tra JavaScript, tài nguyên và mô phỏng chuyển động cá. `npm run export` tạo bản HTML độc lập trong exports/. File này mở trực tiếp trên trình duyệt máy tính; trên điện thoại nên dùng bản web đã triển khai.
 
-`npm run export` xuất HTML chơi offline. scripts/export.cjs nhúng đủ ảnh và mã. public/ là phần triển khai; sprites/, docs/, archive/ giữ tài nguyên và lịch sử. Các tệp cũ chỉ để đối chiếu.
+Bản HTML độc lập nhúng WebP đã tối ưu (khoảng 6,5 MB); PNG nguồn vẫn được giữ. public/assets có cả PNG và WebP để xuất lại không cần công cụ chuyển ảnh.
