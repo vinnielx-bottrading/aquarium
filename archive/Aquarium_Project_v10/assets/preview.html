@@ -1,0 +1,28 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nhóm A — Kiểm tra lớp hồ cá</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#ebe8e1;color:#243f43;font:16px system-ui,sans-serif}header{padding:20px 5vw}h1{font-size:25px;margin:0 0 8px}p{margin:5px 0;font-size:14px}.controls{display:flex;flex-wrap:wrap;gap:20px;padding:12px 5vw;background:#fff9}label{display:flex;gap:8px;align-items:center}#scene{position:relative;width:min(1200px,100%);aspect-ratio:16/9;margin:20px auto;background:#ddd9d1;overflow:hidden}#scene img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.note{padding:10px 5vw 25px}.surface{display:none}.surface.active{display:block}button{padding:8px 14px;border:0;border-radius:5px;background:#275b62;color:white;cursor:pointer}</style>
+<header><h1>Hồ cá 2.5D · Nhóm A / v02</h1><p>Bản kiểm tra kỹ thuật: hồ rỗng → phông nền → nước → phản sáng. Chưa có cá hoặc tiểu cảnh.</p></header>
+<div class="controls"><label><input id="wet" type="checkbox" checked>Nước</label><label><input id="back" type="checkbox" checked>Phông xanh</label><label><input id="shine" type="checkbox" checked>Phản sáng</label><label>Mực nước <input id="level" type="range" min="0" max="100" value="100"></label><button id="fill">Bơm nước</button><button id="pause">Dừng gợn nước</button></div>
+<div id="scene">
+<img src="source_images/A03_ROOM_v01.png" alt="Không gian nền" style="object-fit:cover">
+<img src="runtime/A02_BASE_v02.svg" alt="Chân đế">
+<img class="back" src="runtime/A04_BACKDROP_v02.svg" alt="Phông hồ">
+<img src="runtime/A01_01_REAR_v02.svg" alt="Kính sau">
+<img src="runtime/A01_02_FLOOR_v02.svg" alt="Đáy hồ">
+<img id="water" src="runtime/A05_WATER_v02.svg" alt="Lớp nước">
+<img class="surface active" src="runtime/A06_SURFACE_F00_v02.svg" alt="Mặt nước">
+<img class="surface" src="runtime/A06_SURFACE_F01_v02.svg" alt="">
+<img class="surface" src="runtime/A06_SURFACE_F02_v02.svg" alt="">
+<img class="surface" src="runtime/A06_SURFACE_F03_v02.svg" alt="">
+<img src="runtime/A01_03_SIDES_v02.svg" alt="Kính bên">
+<img src="runtime/A01_04_FRONT_v02.svg" alt="Viền kính trước">
+<img class="shine" src="runtime/A07_REFLECTION_v02.svg" alt="Phản sáng">
+</div><p class="note">Ảnh tạo bằng AI được giữ nguyên trong source_images. Các lớp runtime được dựng riêng bằng mã để có alpha sạch và cùng hệ tọa độ. Đây là bản thử kỹ thuật, không phải ảnh gốc đã tách tự động.</p>
+<script>
+const $=s=>document.querySelector(s),surfaces=[...document.querySelectorAll('.surface')];let frame=0,playing=true,fillToken=0;
+function update(){const q=+$('#level').value/100,on=$('#wet').checked&&q>0;$('#water').style.visibility=on?'visible':'hidden';$('#water').style.transform=`translateY(${691*(1-q)/900*100}%) scaleY(${q})`;$('#water').style.transformOrigin='0 0';surfaces.forEach((e,i)=>{e.style.visibility=on?'visible':'hidden';e.style.transform=`translateY(${(691-285)*(1-q)/900*100}%)`;e.classList.toggle('active',i===frame)});$('.back').style.visibility=$('#back').checked?'visible':'hidden';$('.shine').style.visibility=$('#shine').checked?'visible':'hidden'}
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',()=>{fillToken++;update()}));
+setInterval(()=>{if(playing){frame=(frame+1)%4;update()}},250);
+$('#pause').onclick=()=>{playing=!playing;$('#pause').textContent=playing?'Dừng gợn nước':'Chạy gợn nước'};
+$('#fill').onclick=()=>{const token=++fillToken;$('#wet').checked=true;const start=performance.now();function step(now){if(token!==fillToken)return;$('#level').value=Math.min(100,(now-start)/30);update();if(now-start<3000)requestAnimationFrame(step)}requestAnimationFrame(step)};
+update();
+</script></html>

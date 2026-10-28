@@ -1,0 +1,72 @@
+﻿id,name,status,cycle,note
+A01,Hồ kính (4 lớp),prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A02,Chân đế,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A03,Không gian phòng,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A04,Phông sau hồ,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A05,Nước,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A06,Mặt nước (4 frame),prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+A07,Phản sáng kính,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+B01,Nền cát vàng,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+B02,Nền sỏi,prototype,0,Có trong bản chơi thử; cần duyệt hình ảnh cuối.
+B03,Đá nhỏ (3 mẫu),draft,2,"Đã có ảnh nguồn, cần làm sạch viền và tích hợp."
+B04,Đá lớn (2 mẫu),draft,3,"Đã có ảnh nguồn, cần làm sạch viền và tích hợp."
+B05,Cụm đá khe trú,planned,3,Chưa sản xuất.
+B06,Lũa thấp,planned,2,Chưa sản xuất.
+B07,Lũa phân nhánh,planned,2,Chưa sản xuất.
+B08,Hang đá,planned,3,Chưa sản xuất.
+B09,Cây thấp (2 mẫu),planned,2,Chưa sản xuất.
+B10,Cây cao (2 mẫu),planned,2,Chưa sản xuất.
+B11,Thảm cỏ,planned,2,Chưa sản xuất.
+B12,Rêu bám,planned,2,Chưa sản xuất.
+B13,Bình gốm nghiêng,planned,3,Chưa sản xuất.
+C01,Cá Ngọc Lam,prototype,0,Mẫu ban ngày đã duyệt; bơi và phát quang bằng mã. Sheet bơi/quay còn lỗi.
+C02,Cá Đuôi Nắng,prototype,0,"Có mẫu tĩnh. Bản thử v03: đuôi mềm, ánh vảy bằng mã; chưa có sheet riêng."
+C03,Cá Sọc Rêu,planned,4,Chưa sản xuất.
+C04,Cá Vây Đỏ,planned,4,Chưa sản xuất.
+D01,Hiệu ứng ghép đôi,planned,5,Chưa sản xuất.
+D02,Ổ trứng,planned,5,Chưa sản xuất.
+D03,Trứng sắp nở,planned,5,Chưa sản xuất.
+D04,Hiệu ứng nở,planned,5,Chưa sản xuất.
+D05,Dấu hiệu lớn lên,planned,5,Chưa sản xuất.
+E01,Hộp thức ăn,planned,1,Chưa sản xuất.
+E02,Hạt thức ăn,planned,1,Chưa sản xuất.
+E03,Túi đựng cá,planned,1,Chưa sản xuất.
+E04,Vợt cá,planned,1,Chưa sản xuất.
+E05,Ống bơm,planned,1,Chưa sản xuất.
+E06,Máy sủi,planned,1,Chưa sản xuất.
+E07,Bộ lọc,planned,1,Chưa sản xuất.
+F01,Bọt khí,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+F02,Ánh sáng khúc xạ,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+F03,Hạt lơ lửng,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+F04,Cát bụi,planned,1,Chưa sản xuất.
+F05,Gợn khi thả cá,planned,1,Chưa sản xuất.
+F06,Tín hiệu xung đột,planned,4,Chưa sản xuất.
+F07,Nước đục,planned,1,Chưa sản xuất.
+G01,Thanh công cụ,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+G02,Thẻ vật phẩm,planned,1,Chưa sản xuất.
+G03,Thẻ loài cá,planned,1,Chưa sản xuất.
+G04,Thông tin cá,planned,1,Chưa sản xuất.
+G05,Công cụ bố trí,planned,1,Chưa sản xuất.
+G06,Dấu chọn vật,planned,1,Chưa sản xuất.
+G07,Icon trạng thái,planned,1,Chưa sản xuất.
+G08,Nút tiến trình,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+G09,Menu chung,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+H01,Nhạc nền,planned,1,Chưa sản xuất.
+H02,Nước và máy sủi,prototype,0,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.
+H03,Rải cát sỏi,planned,1,Chưa sản xuất.
+H04,Đặt đá lũa,planned,1,Chưa sản xuất.
+H05,Bơm nước,planned,1,Chưa sản xuất.
+H06,Thả cá,planned,1,Chưa sản xuất.
+H07,Rắc thức ăn,planned,1,Chưa sản xuất.
+H08,Cá con ra đời,planned,5,Chưa sản xuất.
+H09,Xung đột,planned,4,Chưa sản xuất.
+H10,Bấm xác nhận,planned,1,Chưa sản xuất.
+C01-SWIM,Ngọc Lam • bơi chậm,draft,1,8 khung nháp; cần xử lý viền và căn pivot.
+C01-TURN,Ngọc Lam • quay đầu,draft,1,"6 góc nháp; nền màu, tỷ lệ lệch."
+C02-SWIM,Đuôi Nắng • bơi chậm,draft,1,Đã tạo sheet 6 khung + một lần sửa. Còn nền vàng/quầng sáng; chưa tích hợp vào game.
+C02-TURN,Đuôi Nắng • quay đầu,planned,1,Cần góc nghiêng → chính diện → đổi hướng.
+C02-FX,Đuôi Nắng • ánh vảy,prototype,1,Đã mô phỏng độ sáng theo thời gian; không phát quang ban đêm.
+S01,Rừng sương,prototype,2,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.
+S02,Thung lũng núi,prototype,3,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.
+S03,Đài quan sát đại dương,prototype,4,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.
+S04,Trạm kính Everest,prototype,5,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.
