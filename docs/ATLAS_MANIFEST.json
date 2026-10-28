@@ -1,0 +1,30 @@
+{
+  "C01_SWIM": {
+    "file": "assets/C01_SWIM.png",
+    "frameWidth": 512,
+    "frameHeight": 320,
+    "count": 8,
+    "playback": "ping-pong 10fps"
+  },
+  "C02_SWIM": {
+    "file": "assets/C02_SWIM.png",
+    "frameWidth": 512,
+    "frameHeight": 320,
+    "count": 6,
+    "playback": "ping-pong 10fps"
+  },
+  "C01_TURN": {
+    "file": "assets/C01_TURN.png",
+    "frameWidth": 512,
+    "frameHeight": 320,
+    "count": 6,
+    "playback": "0\u21925 over 0.85 seconds; mirrored for left\u2192right"
+  },
+  "C02_TURN": {
+    "file": "assets/C02_TURN.png",
+    "frameWidth": 512,
+    "frameHeight": 320,
+    "count": 6,
+    "playback": "0\u21925 over 0.85 seconds; mirrored for left\u2192right"
+  }
+}

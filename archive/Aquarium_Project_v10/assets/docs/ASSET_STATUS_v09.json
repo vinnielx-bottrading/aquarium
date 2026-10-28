@@ -1,0 +1,499 @@
+[
+  {
+    "id": "A01",
+    "name": "Hồ kính (4 lớp)",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A02",
+    "name": "Chân đế",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A03",
+    "name": "Không gian phòng",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A04",
+    "name": "Phông sau hồ",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A05",
+    "name": "Nước",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A06",
+    "name": "Mặt nước (4 frame)",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "A07",
+    "name": "Phản sáng kính",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "B01",
+    "name": "Nền cát vàng",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "B02",
+    "name": "Nền sỏi",
+    "status": "prototype",
+    "note": "Có trong bản chơi thử; cần duyệt hình ảnh cuối.",
+    "cycle": 0
+  },
+  {
+    "id": "B03",
+    "name": "Đá nhỏ (3 mẫu)",
+    "status": "draft",
+    "note": "Đã có ảnh nguồn, cần làm sạch viền và tích hợp.",
+    "cycle": 2
+  },
+  {
+    "id": "B04",
+    "name": "Đá lớn (2 mẫu)",
+    "status": "draft",
+    "note": "Đã có ảnh nguồn, cần làm sạch viền và tích hợp.",
+    "cycle": 3
+  },
+  {
+    "id": "B05",
+    "name": "Cụm đá khe trú",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 3
+  },
+  {
+    "id": "B06",
+    "name": "Lũa thấp",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B07",
+    "name": "Lũa phân nhánh",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B08",
+    "name": "Hang đá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 3
+  },
+  {
+    "id": "B09",
+    "name": "Cây thấp (2 mẫu)",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B10",
+    "name": "Cây cao (2 mẫu)",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B11",
+    "name": "Thảm cỏ",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B12",
+    "name": "Rêu bám",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 2
+  },
+  {
+    "id": "B13",
+    "name": "Bình gốm nghiêng",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 3
+  },
+  {
+    "id": "C01",
+    "name": "Cá Ngọc Lam",
+    "status": "prototype",
+    "note": "Mẫu ban ngày đã duyệt; bơi và phát quang bằng mã. Sheet bơi/quay còn lỗi.",
+    "cycle": 0
+  },
+  {
+    "id": "C02",
+    "name": "Cá Đuôi Nắng",
+    "status": "prototype",
+    "note": "Có mẫu tĩnh. Bản thử v03: đuôi mềm, ánh vảy bằng mã; chưa có sheet riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "C03",
+    "name": "Cá Sọc Rêu",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 4
+  },
+  {
+    "id": "C04",
+    "name": "Cá Vây Đỏ",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 4
+  },
+  {
+    "id": "D01",
+    "name": "Hiệu ứng ghép đôi",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "D02",
+    "name": "Ổ trứng",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "D03",
+    "name": "Trứng sắp nở",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "D04",
+    "name": "Hiệu ứng nở",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "D05",
+    "name": "Dấu hiệu lớn lên",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "E01",
+    "name": "Hộp thức ăn",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E02",
+    "name": "Hạt thức ăn",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E03",
+    "name": "Túi đựng cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E04",
+    "name": "Vợt cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E05",
+    "name": "Ống bơm",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E06",
+    "name": "Máy sủi",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "E07",
+    "name": "Bộ lọc",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "F01",
+    "name": "Bọt khí",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "F02",
+    "name": "Ánh sáng khúc xạ",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "F03",
+    "name": "Hạt lơ lửng",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "F04",
+    "name": "Cát bụi",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "F05",
+    "name": "Gợn khi thả cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "F06",
+    "name": "Tín hiệu xung đột",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 4
+  },
+  {
+    "id": "F07",
+    "name": "Nước đục",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G01",
+    "name": "Thanh công cụ",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "G02",
+    "name": "Thẻ vật phẩm",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G03",
+    "name": "Thẻ loài cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G04",
+    "name": "Thông tin cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G05",
+    "name": "Công cụ bố trí",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G06",
+    "name": "Dấu chọn vật",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G07",
+    "name": "Icon trạng thái",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "G08",
+    "name": "Nút tiến trình",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "G09",
+    "name": "Menu chung",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "H01",
+    "name": "Nhạc nền",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H02",
+    "name": "Nước và máy sủi",
+    "status": "prototype",
+    "note": "Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.",
+    "cycle": 0
+  },
+  {
+    "id": "H03",
+    "name": "Rải cát sỏi",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H04",
+    "name": "Đặt đá lũa",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H05",
+    "name": "Bơm nước",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H06",
+    "name": "Thả cá",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H07",
+    "name": "Rắc thức ăn",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "H08",
+    "name": "Cá con ra đời",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 5
+  },
+  {
+    "id": "H09",
+    "name": "Xung đột",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 4
+  },
+  {
+    "id": "H10",
+    "name": "Bấm xác nhận",
+    "status": "planned",
+    "note": "Chưa sản xuất.",
+    "cycle": 1
+  },
+  {
+    "id": "C01-SWIM",
+    "name": "Ngọc Lam • bơi chậm",
+    "status": "draft",
+    "note": "8 khung nháp; cần xử lý viền và căn pivot.",
+    "cycle": 1
+  },
+  {
+    "id": "C01-TURN",
+    "name": "Ngọc Lam • quay đầu",
+    "status": "draft",
+    "note": "6 góc nháp; nền màu, tỷ lệ lệch.",
+    "cycle": 1
+  },
+  {
+    "id": "C02-SWIM",
+    "name": "Đuôi Nắng • bơi chậm",
+    "status": "draft",
+    "note": "Đã tạo sheet 6 khung + một lần sửa. Còn nền vàng/quầng sáng; chưa tích hợp vào game.",
+    "cycle": 1
+  },
+  {
+    "id": "C02-TURN",
+    "name": "Đuôi Nắng • quay đầu",
+    "status": "planned",
+    "note": "Cần góc nghiêng → chính diện → đổi hướng.",
+    "cycle": 1
+  },
+  {
+    "id": "C02-FX",
+    "name": "Đuôi Nắng • ánh vảy",
+    "status": "prototype",
+    "note": "Đã mô phỏng độ sáng theo thời gian; không phát quang ban đêm.",
+    "cycle": 1
+  },
+  {
+    "id": "S01",
+    "name": "Rừng sương",
+    "status": "prototype",
+    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "cycle": 2
+  },
+  {
+    "id": "S02",
+    "name": "Thung lũng núi",
+    "status": "prototype",
+    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "cycle": 3
+  },
+  {
+    "id": "S03",
+    "name": "Đài quan sát đại dương",
+    "status": "prototype",
+    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "cycle": 4
+  },
+  {
+    "id": "S04",
+    "name": "Trạm kính Everest",
+    "status": "prototype",
+    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "cycle": 5
+  }
+]
