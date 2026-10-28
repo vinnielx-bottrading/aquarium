@@ -18,23 +18,17 @@ function addFish(species,quiet=false){
  if(state.level<40){if(!quiet)notify('Bơm nước lên ít nhất 40% rồi thả cá nhé.');return}
  const depth=Math.random(),size=(species==='blue'?175:190)*(1-depth*.24);
  fish.push({id:nextFishId++,species,x:300+Math.random()*900,dir:Math.random()<.5?-1:1,turn:0,depth,size,phase:Math.random()*Math.PI*2,speed:22+Math.random()*22,lane:.2+Math.random()*.6,glow:state.night?1:0});
+ FishMotion.init(fish[fish.length-1],state.level);
  updateFishUI();
 }
 function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=fish.length?40:0;$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
 function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);updateFishUI()}
-function updateFish(dt){
- for(const f of fish){
-  f.glow+=( (state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));
-  const margin=f.size*.58,left=L+margin+18,right=R-margin-18;
-  if(f.turn>0){f.turn=Math.max(0,f.turn-dt/.85);if(f.turn===0)f.dir*=-1}
-  else{f.x+=f.dir*f.speed*dt*(1+.12*Math.sin(t+f.phase));if(f.x<left||f.x>right){f.x=Math.max(left,Math.min(right,f.x));f.turn=1}}
- }
-}
+function updateFish(dt){for(const f of fish){f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));FishMotion.update(f,dt,state.level)}}
 function drawFishSprite(im,f,xscale,y,alpha){
  const atlas=imgs[f.species+'Swim'];
  if(!atlas||!atlas.complete||!atlas.naturalWidth)return;
- const frame=Animation.swimFrame(f.species,t,f.phase);
- g.save();g.translate(f.x,y);g.scale(xscale,1);g.globalAlpha=alpha*(1-f.depth*.13);
+ const frame=Animation.swimFrame(f.species,f.swimClock,f.phase);
+ g.save();g.translate(f.x,y);g.scale(xscale,1);g.rotate(f.pitch||0);g.globalAlpha=alpha*(1-f.depth*.13);
  if(f.species==='gold'&&goldFX&&!state.night)g.filter='brightness('+(1.04+.06*Math.sin(t*1.7+f.phase))+')';
  if(f.species==='blue'&&f.glow>.01){g.shadowColor='rgba(40,225,255,'+f.glow+')';g.shadowBlur=14*f.glow;g.filter='brightness('+(1+f.glow*.4)+')';}
  g.drawImage(atlas,frame*512,0,512,320,-f.size/2,-f.size*.3125,f.size,f.size*.625);g.restore();
@@ -46,10 +40,10 @@ function drawTurn(f,y){
  if(f.species==='blue'&&f.glow>.01){g.shadowColor='#36e3ff';g.shadowBlur=f.glow*14;g.filter='brightness('+(1+f.glow*.4)+')';}
  g.drawImage(atlas,frame*512,0,512,320,-f.size/2,-f.size*.3125,f.size,f.size*.625);g.restore();
 }
-function drawFish(){
- for(const f of [...fish].sort((a,b)=>b.depth-a.depth)){
+function drawFish(list=fish){
+ for(const f of [...list].sort((a,b)=>b.depth-a.depth)){
   const h=f.size*.5,top=surface()+h*.5+14,bottom=B-h*.5-40;
-  const y=top+(bottom-top)*f.lane+Math.sin(t*.65+f.phase)*Math.min(9,Math.max(0,(bottom-top)*.07));
+  const y=f.y;
   const scale=f.dir;if(f.turn>0){drawTurn(f,y);continue;}
   if(f.species==='blue'&&f.glow>.01){g.save();g.globalCompositeOperation='screen';g.globalAlpha=f.glow*.35;const glow=g.createRadialGradient(f.x,y,2,f.x,y,f.size*.62);glow.addColorStop(0,'rgba(48,221,255,.3)');glow.addColorStop(.55,'rgba(29,193,243,.1)');glow.addColorStop(1,'rgba(29,193,243,0)');g.fillStyle=glow;g.fillRect(f.x-f.size*.7,y-f.size*.7,f.size*1.4,f.size*1.4);g.restore()}
   drawFishSprite(imgs[f.species],f,scale,y,1);
@@ -104,7 +98,7 @@ function render(dt){g.clearRect(0,0,1600,900);
   // Gentle caustic ribbons at floor.
   g.save();g.globalCompositeOperation='screen';g.strokeStyle=state.night?'rgba(112,233,244,.19)':'rgba(238,255,225,.25)';g.lineWidth=1.2;
   for(let j=0;j<6;j++){g.beginPath();for(let x=L;x<R+DX;x+=12){let yy=B-11-j*10+Math.sin(x*.024+t*.7+j)*4+Math.cos(x*.013-t*.5)*3;x===L?g.moveTo(x,yy):g.lineTo(x,yy)}g.stroke()}g.restore();
-  drawFish();
+
   // Fine suspended particles.
   for(let i=0;i<38;i++){let x=L+20+(i*127.3+t*(i%2?2:-2))%(R-L-40),yy=B-((i*43+t*4)%(Math.max(1,B-y)));g.fillStyle='rgba(229,255,247,.26)';g.beginPath();g.arc(x,yy,.6+(i%3)*.3,0,7);g.fill()}
   for(const p of particles){g.strokeStyle='rgba(222,255,255,.5)';g.lineWidth=1;g.beginPath();g.ellipse(p.x+Math.sin(t*2+p.seed)*4,p.y,p.r,p.r*1.1,0,0,7);g.stroke();g.fillStyle='#f0ffffa0';g.beginPath();g.arc(p.x-1+Math.sin(t*2+p.seed)*4,p.y-p.r*.4,Math.max(.5,p.r*.18),0,7);g.fill()}
@@ -117,6 +111,7 @@ function render(dt){g.clearRect(0,0,1600,900);
   // Visible incoming water while filling.
   if(state.target>state.level+.1){g.strokeStyle='rgba(193,249,255,.65)';g.lineWidth=6;g.beginPath();g.moveTo(R-90,T-7);g.quadraticCurveTo(R-100,y-40,R-95+Math.sin(t*20)*2,y-7);g.stroke()}
  }
+ g.save();poly([[L,T],[L+DX,T+DY],[R+DX,T+DY],[R+DX,B+DY],[R,B],[L,B]],null);g.clip();drawDecorWorld();g.restore();
  // Front and side glass remains clear.
  poly([[L,T],[L+DX,T+DY],[L+DX,B+DY],[L,B]],'rgba(205,244,243,.035)','#99c5c7',2);
  poly([[R,T],[R+DX,T+DY],[R+DX,B+DY],[R,B]],'rgba(104,182,193,.055)','#91bfc1',2);
@@ -130,7 +125,6 @@ $('water').oninput=e=>{state.level=state.target=Math.max(fish.length?40:0,+e.tar
 document.querySelectorAll('[data-bed]').forEach(b=>b.onclick=()=>{state.bed=b.dataset.bed;document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x===b))});
 for(const [id,key] of [['bubbles','bubbles'],['light','night']])$(id).onclick=()=>{state[key]=!state[key];$(id).classList.toggle('active',state[key]);$(id).setAttribute('aria-pressed',state[key]);if(id==='light')$(id).textContent=state.night?'Ban ngày':'Buổi tối'};
 $('pause').onclick=()=>{state.paused=!state.paused;$('pause').textContent=state.paused?'Tiếp tục hiệu ứng':'Tạm dừng hiệu ứng'};
-c.addEventListener('pointerdown',e=>{const box=c.getBoundingClientRect(),x=(e.clientX-box.left)/box.width*1600,y=(e.clientY-box.top)/box.height*900;if(state.level>2&&x>L+20&&x<R-20&&y>surface()+DY&&y<B)ripples.push({x,age:0})});
 $('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else notify('Trình duyệt này chưa hỗ trợ toàn màn hình.')}catch{notify('Không mở được toàn màn hình trong chế độ xem này.')}};
 $('sound').onclick=async()=>{try{if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error();audioCtx=new AC();const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*2,audioCtx.sampleRate),data=buffer.getChannelData(0);let last=0;for(let i=0;i<data.length;i++){last=(last+.025*(Math.random()*2-1))/1.025;data[i]=last*3}noiseNode=audioCtx.createBufferSource();noiseNode.buffer=buffer;noiseNode.loop=true;const filter=audioCtx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=700;gain=audioCtx.createGain();gain.gain.value=0;noiseNode.connect(filter).connect(gain).connect(audioCtx.destination);noiseNode.start()}await audioCtx.resume();state.sound=!state.sound;$('sound').classList.toggle('active',state.sound);$('sound').setAttribute('aria-pressed',state.sound);if(state.sound&&state.level<2)notify('Âm nước sẽ phát khi hồ có nước và máy sủi bật.')}catch{notify('Âm thanh chưa được trình duyệt cho phép.')}};
 $('reset').onclick=()=>{fish=[];updateFishUI();state.level=state.target=0;state.bed='none';particles=[];ripples=[];document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x.dataset.bed==='none'));notify('Đã trả hồ về trạng thái trống.')};
@@ -139,6 +133,6 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){state.paused=true;$('
 $('addBlue').onclick=()=>addFish('blue');$('addGold').onclick=()=>addFish('gold');
 $('clearFish').onclick=()=>{fish=[];updateFishUI();notify('Đã đưa cá ra; có thể xả nước.')};
 $('demoFish').onclick=()=>{sampleFish();notify('Đã thả 4 Ngọc Lam và 2 Đuôi Nắng.')};
-sampleFish();ui();requestAnimationFrame(step);
+sampleFish();ui();
 
 $('testTurn').onclick=()=>{fish.forEach(f=>f.turn=1);notify('Đang thử 6 góc quay đầu của cả hai loài.')}

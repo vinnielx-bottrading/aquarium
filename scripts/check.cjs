@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),cp=require('node:child_process');
 const root=path.resolve(__dirname,'..'),pub=path.join(root,'public');
-for(const n of ['animation.js','game.js','app.js'])cp.execFileSync(process.execPath,['--check',path.join(pub,n)]);
+for(const n of ['animation.js','motion.js','decor.js','decor-data.js','game.js','app.js'])cp.execFileSync(process.execPath,['--check',path.join(pub,n)]);
 const a=require(path.join(pub,'animation.js'));
 for(const s of ['gold','blue']){const n=s==='gold'?6:8;const seen=new Set();for(let t=0;t<3;t+=.017){const frame=a.swimFrame(s,t);assert(frame>=0&&frame<n);seen.add(frame)}assert.equal(seen.size,n)}
 assert.equal(a.turnFrame(1),0);assert.equal(a.turnFrame(.001),5);assert.equal(a.turnFrame(0),5);

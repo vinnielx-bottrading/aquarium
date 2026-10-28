@@ -65,15 +65,15 @@
   {
     "id": "B03",
     "name": "Đá nhỏ (3 mẫu)",
-    "status": "draft",
-    "note": "Đã có ảnh nguồn, cần làm sạch viền và tích hợp.",
+    "status": "prototype",
+    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
     "cycle": 2
   },
   {
     "id": "B04",
     "name": "Đá lớn (2 mẫu)",
-    "status": "draft",
-    "note": "Đã có ảnh nguồn, cần làm sạch viền và tích hợp.",
+    "status": "prototype",
+    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
     "cycle": 3
   },
   {
@@ -143,28 +143,28 @@
     "id": "C01",
     "name": "Cá Ngọc Lam",
     "status": "prototype",
-    "note": "v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",
+    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",
     "cycle": 0
   },
   {
     "id": "C02",
     "name": "Cá Đuôi Nắng",
     "status": "prototype",
-    "note": "v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",
+    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",
     "cycle": 0
   },
   {
     "id": "C03",
     "name": "Cá Sọc Rêu",
     "status": "planned",
-    "note": "Chưa sản xuất.",
+    "note": "Tạm hoãn theo yêu cầu; hiện chỉ triển khai Ngọc Lam và Đuôi Nắng.",
     "cycle": 4
   },
   {
     "id": "C04",
     "name": "Cá Vây Đỏ",
     "status": "planned",
-    "note": "Chưa sản xuất.",
+    "note": "Tạm hoãn theo yêu cầu; hiện chỉ triển khai Ngọc Lam và Đuôi Nắng.",
     "cycle": 4
   },
   {
@@ -331,15 +331,15 @@
   {
     "id": "G05",
     "name": "Công cụ bố trí",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "prototype",
+    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
     "cycle": 1
   },
   {
     "id": "G06",
     "name": "Dấu chọn vật",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "prototype",
+    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
     "cycle": 1
   },
   {
