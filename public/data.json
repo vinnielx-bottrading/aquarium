@@ -205,15 +205,15 @@
   {
     "id": "E01",
     "name": "Hộp thức ăn",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v15: hũ thức ăn PNG/WebP nền trong suốt, tích hợp tab Cho ăn ngoài hồ.",
     "cycle": 1
   },
   {
     "id": "E02",
     "name": "Hạt thức ăn",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v15: hạt Canvas chìm 8–12 px/s; cá tìm và ăn; tối đa 32 hạt, tự dọn sau 32 giây hoặc khi chạm nền.",
     "cycle": 1
   },
   {
@@ -501,6 +501,13 @@
     "name": "Hai loài cá · trú ẩn",
     "status": "ready",
     "note": "v14: vào/nghỉ/quay/ra, điều kiện cửa và nước, nút thử, lớp che cửa hang.",
+    "cycle": 1
+  },
+  {
+    "id": "C-FEED",
+    "name": "Hành vi tìm thức ăn",
+    "status": "ready",
+    "note": "v15: chọn hạt riêng, bơi đến miệng, ăn rồi bơi tự do; rời hang qua quay đầu và bơi ra.",
     "cycle": 1
   }
 ]

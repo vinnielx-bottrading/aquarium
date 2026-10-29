@@ -1,0 +1,74 @@
+﻿id,name,status,note,cycle
+A01,Hồ kính (4 lớp),prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A02,Chân đế,prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A03,Không gian phòng,prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A04,Phông sau hồ,prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A05,Nước,prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A06,Mặt nước (4 frame),prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+A07,Phản sáng kính,prototype,Có trong bản chơi thử; cần duyệt hình ảnh cuối.,0
+B01,Nền cát vàng,ready,"v14: nền kín sát vách, 8 mức độ dày, nâng đồ trang trí và giới hạn vùng bơi theo nền.",0
+B02,Nền sỏi,ready,"v14: nền kín sát vách, 8 mức độ dày, nâng đồ trang trí và giới hạn vùng bơi theo nền.",0
+B03,Đá nhỏ (3 mẫu),ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B04,Đá lớn (2 mẫu),ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",3
+B05,Cụm đá khe trú,ready,"v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",3
+B06,Lũa thấp,ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B07,Lũa phân nhánh,ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B08,Hang đá,ready,"v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",3
+B09,Cây thấp (2 mẫu),ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B10,Cây cao (2 mẫu),ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B11,Thảm cỏ,ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B12,Rêu bám,ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",2
+B13,Bình gốm nghiêng,ready,"v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",3
+C01,Cá Ngọc Lam,prototype,"v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",0
+C02,Cá Đuôi Nắng,prototype,"v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",0
+C03,Cá Sọc Rêu,planned,Tạm hoãn theo yêu cầu; hiện chỉ triển khai Ngọc Lam và Đuôi Nắng.,4
+C04,Cá Vây Đỏ,planned,Tạm hoãn theo yêu cầu; hiện chỉ triển khai Ngọc Lam và Đuôi Nắng.,4
+D01,Hiệu ứng ghép đôi,planned,Chưa sản xuất.,5
+D02,Ổ trứng,planned,Chưa sản xuất.,5
+D03,Trứng sắp nở,planned,Chưa sản xuất.,5
+D04,Hiệu ứng nở,planned,Chưa sản xuất.,5
+D05,Dấu hiệu lớn lên,planned,Chưa sản xuất.,5
+E01,Hộp thức ăn,ready,"v15: hũ thức ăn PNG/WebP nền trong suốt, tích hợp tab Cho ăn ngoài hồ.",1
+E02,Hạt thức ăn,ready,"v15: hạt Canvas chìm 8–12 px/s; cá tìm và ăn; tối đa 32 hạt, tự dọn sau 32 giây hoặc khi chạm nền.",1
+E03,Túi đựng cá,planned,Chưa sản xuất.,1
+E04,Vợt cá,planned,Chưa sản xuất.,1
+E05,Ống bơm,planned,Chưa sản xuất.,1
+E06,Máy sủi,planned,Chưa sản xuất.,1
+E07,Bộ lọc,planned,Chưa sản xuất.,1
+F01,Bọt khí,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+F02,Ánh sáng khúc xạ,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+F03,Hạt lơ lửng,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+F04,Cát bụi,planned,Chưa sản xuất.,1
+F05,Gợn khi thả cá,planned,Chưa sản xuất.,1
+F06,Tín hiệu xung đột,planned,Chưa sản xuất.,4
+F07,Nước đục,planned,Chưa sản xuất.,1
+G01,Thanh công cụ,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+G02,Thẻ vật phẩm,planned,Chưa sản xuất.,1
+G03,Thẻ loài cá,planned,Chưa sản xuất.,1
+G04,Thông tin cá,planned,Chưa sản xuất.,1
+G05,Công cụ bố trí,prototype,v14: khay 16 món; kéo/đổi cỡ/lật/thu hồi; hoàn tác cả nền và đồ; lưu trình duyệt.,1
+G06,Dấu chọn vật,prototype,v14: khay 16 món; kéo/đổi cỡ/lật/thu hồi; hoàn tác cả nền và đồ; lưu trình duyệt.,1
+G07,Icon trạng thái,planned,Chưa sản xuất.,1
+G08,Nút tiến trình,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+G09,Menu chung,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+H01,Nhạc nền,planned,Chưa sản xuất.,1
+H02,Nước và máy sủi,prototype,Có phiên bản đơn giản bằng mã trong game; chưa có bộ asset hoàn chỉnh riêng.,0
+H03,Rải cát sỏi,planned,Chưa sản xuất.,1
+H04,Đặt đá lũa,planned,Chưa sản xuất.,1
+H05,Bơm nước,planned,Chưa sản xuất.,1
+H06,Thả cá,planned,Chưa sản xuất.,1
+H07,Rắc thức ăn,planned,Chưa sản xuất.,1
+H08,Cá con ra đời,planned,Chưa sản xuất.,5
+H09,Xung đột,planned,Chưa sản xuất.,4
+H10,Bấm xác nhận,planned,Chưa sản xuất.,1
+C01-SWIM,Ngọc Lam • bơi chậm,prototype,"v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",1
+C01-TURN,Ngọc Lam • quay đầu,prototype,"v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",1
+C02-SWIM,Đuôi Nắng • bơi chậm,prototype,"v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",1
+C02-TURN,Đuôi Nắng • quay đầu,prototype,"v11: đã tích hợp sprite bơi (Ngọc Lam 8 / Đuôi Nắng 6 khung) và quay đầu 6 góc. Chưa có ăn, cá con hoặc sinh sản.",1
+C02-FX,Đuôi Nắng • ánh vảy,prototype,Đã mô phỏng độ sáng theo thời gian; không phát quang ban đêm.,1
+S01,Rừng sương,prototype,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.,2
+S02,Thung lũng núi,prototype,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.,3
+S03,Đài quan sát đại dương,prototype,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.,4
+S04,Trạm kính Everest,prototype,Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.,5
+C-SHELTER,Hai loài cá · trú ẩn,ready,"v14: vào/nghỉ/quay/ra, điều kiện cửa và nước, nút thử, lớp che cửa hang.",1
+C-FEED,Hành vi tìm thức ăn,ready,"v15: chọn hạt riêng, bơi đến miệng, ăn rồi bơi tự do; rời hang qua quay đầu và bơi ra.",1

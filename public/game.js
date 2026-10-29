@@ -7,6 +7,7 @@ ASSETS.goldTurn='assets/C02_TURN.png';
 const c=document.getElementById('tank'),g=c.getContext('2d'),$=id=>document.getElementById(id);
 const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,night:false,waves:.35,paused:false,sound:false};
 const imgs={};for(const [k,v] of Object.entries(ASSETS)){const im=new Image();im.src=v;imgs[k]=im}
+const food=Feeding.create();
 let fish=[],nextFishId=0;
 let t=0,last=0,spawn=0,particles=[],ripples=[],timer,audioCtx,noiseNode,gain;
 const L=130,R=1370,T=225,B=700,DX=100,DY=-65;
@@ -23,7 +24,7 @@ function addFish(species,quiet=false){
 }
 function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=minimumWater();$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
 function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);updateFishUI()}
-function updateFish(dt){for(const f of fish){f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt))FishMotion.update(f,dt,state.level,Math.random,bedHeight())}}
+function updateFish(dt){Feeding.tick(food,fish,dt,state.level,bedHeight());for(const f of fish){f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt)&&!Feeding.steer(food,f,dt,state.level,bedHeight()))FishMotion.update(f,dt,state.level,Math.random,bedHeight())}}
 function drawFishSprite(im,f,xscale,y,alpha){
  const atlas=imgs[f.species+'Swim'];
  if(!atlas||!atlas.complete||!atlas.naturalWidth)return;
@@ -119,15 +120,14 @@ function render(dt){g.clearRect(0,0,1600,900);
  line(L,T,L+DX,T+DY,'#e3ffff',2);line(L+DX,T+DY,R+DX,T+DY,'#cbeeed',2);line(R,T,R+DX,T+DY,'#e0ffff',2);
  poly([[L+6,T+6],[L+140,T+6],[L+6,T+170]],'rgba(255,255,255,.11)');line(R-9,T+12,R-9,B-12,'rgba(241,255,255,.32)',3);
 }
-function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;particles.push({x:R-100+Math.random()*17,y:B-bedHeight()-7,r:1.3+Math.random()*3,seed:Math.random()*10,speed:28+Math.random()*32})}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();render(dt);requestAnimationFrame(step)}
+function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;particles.push({x:R-100+Math.random()*17,y:B-bedHeight()-7,r:1.3+Math.random()*3,seed:Math.random()*10,speed:28+Math.random()*32})}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();feedingUI();render(dt);requestAnimationFrame(step)}
 $('fill').onclick=()=>{state.target=100;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};$('drain').onclick=()=>{if(fish.length){notify('Đưa cá ra trước khi xả cạn hồ.');return}state.target=0;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};
 $('water').oninput=e=>{state.level=state.target=Math.max(minimumWater(),+e.target.value);ui()};$('waves').oninput=e=>state.waves=+e.target.value/100;
 
 for(const [id,key] of [['bubbles','bubbles'],['light','night']])$(id).onclick=()=>{state[key]=!state[key];$(id).classList.toggle('active',state[key]);$(id).setAttribute('aria-pressed',state[key]);if(id==='light')$(id).textContent=state.night?'Ban ngày':'Buổi tối'};
 $('pause').onclick=()=>{state.paused=!state.paused;$('pause').textContent=state.paused?'Tiếp tục hiệu ứng':'Tạm dừng hiệu ứng'};
-$('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else notify('Trình duyệt này chưa hỗ trợ toàn màn hình.')}catch{notify('Không mở được toàn màn hình trong chế độ xem này.')}};
 $('sound').onclick=async()=>{try{if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error();audioCtx=new AC();const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*2,audioCtx.sampleRate),data=buffer.getChannelData(0);let last=0;for(let i=0;i<data.length;i++){last=(last+.025*(Math.random()*2-1))/1.025;data[i]=last*3}noiseNode=audioCtx.createBufferSource();noiseNode.buffer=buffer;noiseNode.loop=true;const filter=audioCtx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=700;gain=audioCtx.createGain();gain.gain.value=0;noiseNode.connect(filter).connect(gain).connect(audioCtx.destination);noiseNode.start()}await audioCtx.resume();state.sound=!state.sound;$('sound').classList.toggle('active',state.sound);$('sound').setAttribute('aria-pressed',state.sound);if(state.sound&&state.level<2)notify('Âm nước sẽ phát khi hồ có nước và máy sủi bật.')}catch{notify('Âm thanh chưa được trình duyệt cho phép.')}};
-$('reset').onclick=()=>{fish=[];updateFishUI();state.level=state.target=0;state.bed='none';particles=[];ripples=[];document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x.dataset.bed==='none'));notify('Đã trả hồ về trạng thái trống.')};
+$('reset').onclick=()=>{fish=[];Feeding.clear(food,fish);food.eaten=0;updateFishUI();state.level=state.target=0;state.bed='none';particles=[];ripples=[];document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x.dataset.bed==='none'));notify('Đã trả hồ về trạng thái trống.')};
 document.addEventListener('visibilitychange',()=>{if(audioCtx){if(document.hidden)audioCtx.suspend();else if(state.sound)audioCtx.resume()}last=performance.now()});
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){state.paused=true;$('pause').textContent='Bật hiệu ứng'}
 $('addBlue').onclick=()=>addFish('blue');$('addGold').onclick=()=>addFish('gold');

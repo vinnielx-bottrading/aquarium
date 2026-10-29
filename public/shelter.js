@@ -13,7 +13,7 @@ const Shelter=(()=>{
  function release(f,level,height,r=Math.random){const s=f.shelter;if(s){if(s.mode!=='seeking'){f.x=s.entry.x;f.y=s.entry.y;}if(Number.isFinite(s.originalDepth))f.depth=s.originalDepth}f.shelter=null;f.shelterCooldown=18+r()*25;f.renderScale=1;f.shelterShade=1;f.turn=0;f.vx=f.vy=0;f.timer=0;f.pitch=0;const b=FishMotion.bounds(f,level,height);f.x=clamp(f.x,b.left,b.right);f.y=clamp(f.y,b.top,b.bottom)}
  function update(f,dt,doors,all,level,height,r=Math.random){
   if(!Number.isFinite(f.shelterCooldown))f.shelterCooldown=8+r()*18;
-  if(!f.shelter){f.shelterCooldown-=dt;if(f.shelterCooldown<=0&&r()<dt*.05){const options=doors.filter(d=>eligible(f,d,level)&&!all.some(other=>other.shelter?.id===d.id));if(options.length)start(f,options[Math.floor(r()*options.length)]);}if(!f.shelter)return false}
+  if(!f.shelter){if(f.foodTarget!=null)return false;f.shelterCooldown-=dt;if(f.shelterCooldown<=0&&r()<dt*.05){const options=doors.filter(d=>eligible(f,d,level)&&!all.some(other=>other.shelter?.id===d.id));if(options.length)start(f,options[Math.floor(r()*options.length)]);}if(!f.shelter)return false}
   const s=f.shelter,d=doors.find(d=>d.id===s.id);if(!d||d.signature!==s.signature||!eligible(f,d,level)){release(f,level,height,r);return false}
   s.age+=dt;f.swimClock+=dt*(s.mode==='resting'?.16:.5);f.pitch*=Math.exp(-dt*4);f.vx=f.vy=0;
   if(s.mode==='seeking'){

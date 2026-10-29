@@ -1,0 +1,4 @@
+# E01_v01 — hũ thức ăn
+Nguồn: built-in Imagegen, nền alpha. Ảnh gốc public/assets/E01_v01.png; bản nén E01_v01.webp. Được tạo ở lượt trước và khôi phục để tích hợp v15.
+
+Prompt: Use case: stylized-concept. Create ONE game inventory asset E01 for a calm elegant 2.5D aquarium game. A small premium cylindrical glass jar filled with warm ochre brown fish food granules, muted moss green screw lid, tiny unlettered cream paper label with a simple gold fish silhouette. Soft hand-painted semi-realistic game art, refined natural textures, soft upper-left illumination, subtle volume, front three-quarter view with slight view of lid, centered entire object, clean readable silhouette with generous transparent margins. True transparent background. No ground plane, no cast shadow, no text, no letters, no watermark, no additional objects. Square composition. Intended to be recognizable at 64px.
