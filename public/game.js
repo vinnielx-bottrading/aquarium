@@ -5,7 +5,7 @@ ASSETS.blueSwim='assets/C01_SWIM.png';
 ASSETS.blueTurn='assets/C01_TURN.png';
 ASSETS.goldTurn='assets/C02_TURN.png';
 const c=document.getElementById('tank'),g=c.getContext('2d'),$=id=>document.getElementById(id);
-const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,night:false,waves:.35,paused:false,sound:false};
+const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,filterPower:true,night:false,waves:.35,paused:false,sound:false};
 const imgs={};for(const [k,v] of Object.entries(ASSETS)){const im=new Image();im.src=v;imgs[k]=im}
 const food=Feeding.create();
 let fish=[],nextFishId=0;
@@ -53,7 +53,7 @@ function drawFish(list=fish){
 }
 function surface(){return B-420*state.level/100}
 function notify(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(timer);timer=setTimeout(()=>$('toast').classList.remove('show'),2000)}
-function ui(){const v=Math.round(state.level);$('water').value=v;$('percent').textContent=v+'%';$('status').textContent=v===0?'Hồ kính đang trống':state.target>state.level+.1?'Đang bơm nước…':state.target<state.level-.1?'Đang xả nước…':'Mực nước '+v+'%';if(gain&&audioCtx)gain.gain.setTargetAtTime(state.sound&&state.level>2&&state.bubbles&&!state.paused?.035:0,audioCtx.currentTime,.2)}
+function ui(){const v=Math.round(state.level);$('water').value=v;$('percent').textContent=v+'%';$('status').textContent=v===0?'Hồ kính đang trống':state.target>state.level+.1?'Đang bơm nước…':state.target<state.level-.1?'Đang xả nước…':'Mực nước '+v+'%';if(gain&&audioCtx)gain.gain.setTargetAtTime(state.sound&&state.level>2&&state.bubbles&&decorations.some(o=>o.type==="E06_v01")&&!state.paused?.035:0,audioCtx.currentTime,.2)}
 let scene='room',goldFX=true;
 $('scene').onchange=e=>{scene=e.target.value};
 $('goldFX').onclick=()=>{goldFX=!goldFX;$('goldFX').setAttribute('aria-pressed',goldFX);$('goldFX').textContent='Ánh vảy Đuôi Nắng: '+(goldFX?'bật':'tắt')};
@@ -114,13 +114,13 @@ function render(dt){g.clearRect(0,0,1600,900);
   // Visible incoming water while filling.
   if(state.target>state.level+.1){g.strokeStyle='rgba(193,249,255,.65)';g.lineWidth=6;g.beginPath();g.moveTo(R-90,T-7);g.quadraticCurveTo(R-100,y-40,R-95+Math.sin(t*20)*2,y-7);g.stroke()}
  }
- g.save();poly([[L,T],[L+DX,T+DY],[R+DX,T+DY],[R+DX,B+DY],[R,B],[L,B]],null);g.clip();drawDecorWorld();g.restore();
+ g.save();poly([[L,T],[L+DX,T+DY],[R+DX,T+DY],[R+DX,B+DY],[R,B],[L,B]],null);g.clip();drawDecorWorld();drawFilterFlow();g.restore();
  // Near/front frame and subtle reflections.
  poly([[L,T],[R,T],[R,B],[L,B]],null,'#64999f',5);poly([[L,T],[R,T],[R,B],[L,B]],null,'#d8f7f5',1.5);
  line(L,T,L+DX,T+DY,'#e3ffff',2);line(L+DX,T+DY,R+DX,T+DY,'#cbeeed',2);line(R,T,R+DX,T+DY,'#e0ffff',2);
  poly([[L+6,T+6],[L+140,T+6],[L+6,T+170]],'rgba(255,255,255,.11)');line(R-9,T+12,R-9,B-12,'rgba(241,255,255,.32)',3);
 }
-function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;particles.push({x:R-100+Math.random()*17,y:B-bedHeight()-7,r:1.3+Math.random()*3,seed:Math.random()*10,speed:28+Math.random()*32})}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();feedingUI();render(dt);requestAnimationFrame(step)}
+function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;for(const o of decorations.filter(o=>o.type==="E06_v01")){const py=o.y-Math.min(o.width*.5816733068,270)*.42;if(py>y+5)particles.push({x:o.x+(Math.random()-.5)*o.width*.55,y:py,r:1.3+Math.random()*2,seed:Math.random()*10,speed:28+Math.random()*32})}}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();feedingUI();render(dt);requestAnimationFrame(step)}
 $('fill').onclick=()=>{state.target=100;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};$('drain').onclick=()=>{if(fish.length){notify('Đưa cá ra trước khi xả cạn hồ.');return}state.target=0;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};
 $('water').oninput=e=>{state.level=state.target=Math.max(minimumWater(),+e.target.value);ui()};$('waves').oninput=e=>state.waves=+e.target.value/100;
 

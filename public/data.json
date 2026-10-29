@@ -80,7 +80,7 @@
     "id": "B05",
     "name": "Cụm đá khe trú",
     "status": "ready",
-    "note": "v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",
+    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách.",
     "cycle": 3
   },
   {
@@ -101,7 +101,7 @@
     "id": "B08",
     "name": "Hang đá",
     "status": "ready",
-    "note": "v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",
+    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách.",
     "cycle": 3
   },
   {
@@ -240,15 +240,15 @@
   {
     "id": "E06",
     "name": "Máy sủi",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v16: PNG/WebP đầu sủi đặt được; bọt phát từ đầu sủi khi ngập nước và Máy sủi bật.",
     "cycle": 1
   },
   {
     "id": "E07",
     "name": "Bộ lọc",
-    "status": "planned",
-    "note": "Chưa sản xuất.",
+    "status": "ready",
+    "note": "v16: PNG/WebP bộ lọc đặt được; dòng nước nhẹ có bật/tắt. Chưa mô phỏng chất lượng nước.",
     "cycle": 1
   },
   {
@@ -509,5 +509,12 @@
     "status": "ready",
     "note": "v15: chọn hạt riêng, bơi đến miệng, ăn rồi bơi tự do; rời hang qua quay đầu và bơi ra.",
     "cycle": 1
+  },
+  {
+    "id": "B08_SIDE",
+    "name": "Hang đá cửa ngang",
+    "note": "v16: cửa trái/phải, che khuất bằng vách đá; cá giữ kích thước và độ rõ khi chui vào.",
+    "status": "ready",
+    "cycle": 3
   }
 ]
