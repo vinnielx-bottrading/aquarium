@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),cp=require('node:child_process');
 const root=path.resolve(__dirname,'..'),pub=path.join(root,'public');
-for(const n of ['animation.js','motion.js','decor.js','decor-data.js','game.js','app.js'])cp.execFileSync(process.execPath,['--check',path.join(pub,n)]);
+for(const n of ['habitat.js','shelter.js','animation.js','motion.js','decor.js','decor-data.js','game.js','app.js'])cp.execFileSync(process.execPath,['--check',path.join(pub,n)]);
 const a=require(path.join(pub,'animation.js'));
 for(const s of ['gold','blue']){const n=s==='gold'?6:8;const seen=new Set();for(let t=0;t<3;t+=.017){const frame=a.swimFrame(s,t);assert(frame>=0&&frame<n);seen.add(frame)}assert.equal(seen.size,n)}
 assert.equal(a.turnFrame(1),0);assert.equal(a.turnFrame(.001),5);assert.equal(a.turnFrame(0),5);
@@ -15,7 +15,7 @@ assert.equal(items.length,16,'Group B needs 16 placeable decorations plus 2 subs
 assert.equal(new Set(items.map(x=>x.id)).size,16);
 for(const item of items){assert(fs.existsSync(path.join(pub,item.src)),item.id);assert(item.ratio>0);assert(['rock','wood','plant','pot'].includes(item.category));if(item.crop)assert(item.crop.length===4&&item.crop.every(Number.isFinite));}
 const decor=fs.readFileSync(path.join(pub,'decor.js'),'utf8');const constrain=decor.match(/function constrainDecor\(o\)\{[^\n]+/)[0];
-const context=vm.createContext({L:130,R:1370,DX:100});vm.runInContext('const dcClamp=(v,a,b)=>Math.max(a,Math.min(b,v));'+constrain,context);
-for(const item of items)for(const x of [-1000,800,3000])for(const y of [100,660,900]){context.input={type:item.id,x,y,width:item.width};const o=vm.runInContext('constrainDecor(input)',context);assert(o.y>=430&&o.y<=694);assert(o.x-o.width/2>=130);assert(o.x+o.width/2<=1470);}
+const context=vm.createContext({L:130,R:1370,DX:100,bedHeight:()=>0});vm.runInContext('const dcClamp=(v,a,b)=>Math.max(a,Math.min(b,v));'+constrain,context);
+for(const item of items)for(const x of [-1000,800,3000])for(const y of [100,660,900]){context.input={type:item.id,x,y,width:item.width};const o=vm.runInContext('constrainDecor(input)',context);assert(o.y>=430&&o.y<=698);assert(o.x-o.width/2>=130);assert(o.x+o.width/2<=1470);}
 assert.equal(data.filter(x=>/^B\d\d$/.test(x.id)&&x.status==='ready').length,13);
 console.log('PASS: all 13 Group B entries, 16 unique decorations, files, crop metadata and placement bounds.');

@@ -52,14 +52,14 @@
     "id": "B01",
     "name": "Nền cát vàng",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v14: nền kín sát vách, 8 mức độ dày, nâng đồ trang trí và giới hạn vùng bơi theo nền.",
     "cycle": 0
   },
   {
     "id": "B02",
     "name": "Nền sỏi",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v14: nền kín sát vách, 8 mức độ dày, nâng đồ trang trí và giới hạn vùng bơi theo nền.",
     "cycle": 0
   },
   {
@@ -80,7 +80,7 @@
     "id": "B05",
     "name": "Cụm đá khe trú",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",
     "cycle": 3
   },
   {
@@ -101,7 +101,7 @@
     "id": "B08",
     "name": "Hang đá",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v14: cửa trú 2.5D; một cá/hang; tự tìm, vào, nghỉ, quay và ra; xử lý khi người chơi sửa hang.",
     "cycle": 3
   },
   {
@@ -332,14 +332,14 @@
     "id": "G05",
     "name": "Công cụ bố trí",
     "status": "prototype",
-    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
+    "note": "v14: khay 16 món; kéo/đổi cỡ/lật/thu hồi; hoàn tác cả nền và đồ; lưu trình duyệt.",
     "cycle": 1
   },
   {
     "id": "G06",
     "name": "Dấu chọn vật",
     "status": "prototype",
-    "note": "v12: khay chọn đá, đặt/kéo, đổi kích thước, thu hồi, hoàn tác; tự lưu bố cục cục bộ.",
+    "note": "v14: khay 16 món; kéo/đổi cỡ/lật/thu hồi; hoàn tác cả nền và đồ; lưu trình duyệt.",
     "cycle": 1
   },
   {
@@ -495,5 +495,12 @@
     "status": "prototype",
     "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
     "cycle": 5
+  },
+  {
+    "id": "C-SHELTER",
+    "name": "Hai loài cá · trú ẩn",
+    "status": "ready",
+    "note": "v14: vào/nghỉ/quay/ra, điều kiện cửa và nước, nút thử, lớp che cửa hang.",
+    "cycle": 1
   }
 ]

@@ -1,0 +1,56 @@
+{
+  "coordinates": "normalized within displayed sprite crop; flip horizontally with decoration",
+  "B08_v01": [
+    [
+      0.38,
+      0.83
+    ],
+    [
+      0.39,
+      0.55
+    ],
+    [
+      0.45,
+      0.4
+    ],
+    [
+      0.51,
+      0.35
+    ],
+    [
+      0.6,
+      0.4
+    ],
+    [
+      0.67,
+      0.56
+    ],
+    [
+      0.69,
+      0.83
+    ]
+  ],
+  "B05_v01": [
+    [
+      0.43,
+      0.7
+    ],
+    [
+      0.55,
+      0.33
+    ],
+    [
+      0.64,
+      0.55
+    ],
+    [
+      0.68,
+      0.7
+    ]
+  ],
+  "render_order": [
+    "rear full sprite",
+    "resident fish",
+    "front sprite outside doorway"
+  ]
+}

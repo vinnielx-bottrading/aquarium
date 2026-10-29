@@ -5,7 +5,7 @@ ASSETS.blueSwim='assets/C01_SWIM.png';
 ASSETS.blueTurn='assets/C01_TURN.png';
 ASSETS.goldTurn='assets/C02_TURN.png';
 const c=document.getElementById('tank'),g=c.getContext('2d'),$=id=>document.getElementById(id);
-const state={level:100,target:100,bed:'sand',bubbles:true,night:false,waves:.35,paused:false,sound:false};
+const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,night:false,waves:.35,paused:false,sound:false};
 const imgs={};for(const [k,v] of Object.entries(ASSETS)){const im=new Image();im.src=v;imgs[k]=im}
 let fish=[],nextFishId=0;
 let t=0,last=0,spawn=0,particles=[],ripples=[],timer,audioCtx,noiseNode,gain;
@@ -18,26 +18,26 @@ function addFish(species,quiet=false){
  if(state.level<40){if(!quiet)notify('Bơm nước lên ít nhất 40% rồi thả cá nhé.');return}
  const depth=Math.random(),size=(species==='blue'?175:190)*(1-depth*.24);
  fish.push({id:nextFishId++,species,x:300+Math.random()*900,dir:Math.random()<.5?-1:1,turn:0,depth,size,phase:Math.random()*Math.PI*2,speed:22+Math.random()*22,lane:.2+Math.random()*.6,glow:state.night?1:0});
- FishMotion.init(fish[fish.length-1],state.level);
+ ensureWater();FishMotion.init(fish[fish.length-1],state.level,Math.random,bedHeight());
  updateFishUI();
 }
-function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=fish.length?40:0;$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
+function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=minimumWater();$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
 function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);updateFishUI()}
-function updateFish(dt){for(const f of fish){f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));FishMotion.update(f,dt,state.level)}}
+function updateFish(dt){for(const f of fish){f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt))FishMotion.update(f,dt,state.level,Math.random,bedHeight())}}
 function drawFishSprite(im,f,xscale,y,alpha){
  const atlas=imgs[f.species+'Swim'];
  if(!atlas||!atlas.complete||!atlas.naturalWidth)return;
  const frame=Animation.swimFrame(f.species,f.swimClock,f.phase);
- g.save();g.translate(f.x,y);g.scale(xscale,1);g.rotate(f.pitch||0);g.globalAlpha=alpha*(1-f.depth*.13);
+ g.save();g.translate(f.x,y);g.scale(xscale*(f.renderScale||1),f.renderScale||1);g.rotate(f.pitch||0);g.globalAlpha=alpha*(1-f.depth*.13)*(f.shelterShade||1);
  if(f.species==='gold'&&goldFX&&!state.night)g.filter='brightness('+(1.04+.06*Math.sin(t*1.7+f.phase))+')';
- if(f.species==='blue'&&f.glow>.01){g.shadowColor='rgba(40,225,255,'+f.glow+')';g.shadowBlur=14*f.glow;g.filter='brightness('+(1+f.glow*.4)+')';}
+ if(f.species==='blue'&&f.glow>.01&&!f.shelter){g.shadowColor='rgba(40,225,255,'+f.glow+')';g.shadowBlur=14*f.glow;g.filter='brightness('+(1+f.glow*.4)+')';}
  g.drawImage(atlas,frame*512,0,512,320,-f.size/2,-f.size*.3125,f.size,f.size*.625);g.restore();
 }
 function drawTurn(f,y){
  const atlas=imgs[f.species+'Turn'];if(!atlas.complete||!atlas.naturalWidth)return;
  const frame=Animation.turnFrame(f.turn);
- g.save();g.translate(f.x,y);g.scale(f.dir,1);g.globalAlpha=1-f.depth*.13;
- if(f.species==='blue'&&f.glow>.01){g.shadowColor='#36e3ff';g.shadowBlur=f.glow*14;g.filter='brightness('+(1+f.glow*.4)+')';}
+ g.save();g.translate(f.x,y);g.scale(f.dir*(f.renderScale||1),f.renderScale||1);g.globalAlpha=(1-f.depth*.13)*(f.shelterShade||1);
+ if(f.species==='blue'&&f.glow>.01&&!f.shelter){g.shadowColor='#36e3ff';g.shadowBlur=f.glow*14;g.filter='brightness('+(1+f.glow*.4)+')';}
  g.drawImage(atlas,frame*512,0,512,320,-f.size/2,-f.size*.3125,f.size,f.size*.625);g.restore();
 }
 function drawFish(list=fish){
@@ -45,7 +45,7 @@ function drawFish(list=fish){
   const h=f.size*.5,top=surface()+h*.5+14,bottom=B-h*.5-40;
   const y=f.y;
   const scale=f.dir;if(f.turn>0){drawTurn(f,y);continue;}
-  if(f.species==='blue'&&f.glow>.01){g.save();g.globalCompositeOperation='screen';g.globalAlpha=f.glow*.35;const glow=g.createRadialGradient(f.x,y,2,f.x,y,f.size*.62);glow.addColorStop(0,'rgba(48,221,255,.3)');glow.addColorStop(.55,'rgba(29,193,243,.1)');glow.addColorStop(1,'rgba(29,193,243,0)');g.fillStyle=glow;g.fillRect(f.x-f.size*.7,y-f.size*.7,f.size*1.4,f.size*1.4);g.restore()}
+  if(f.species==='blue'&&f.glow>.01&&!f.shelter){g.save();g.globalCompositeOperation='screen';g.globalAlpha=f.glow*.35;const glow=g.createRadialGradient(f.x,y,2,f.x,y,f.size*.62);glow.addColorStop(0,'rgba(48,221,255,.3)');glow.addColorStop(.55,'rgba(29,193,243,.1)');glow.addColorStop(1,'rgba(29,193,243,0)');g.fillStyle=glow;g.fillRect(f.x-f.size*.7,y-f.size*.7,f.size*1.4,f.size*1.4);g.restore()}
   drawFishSprite(imgs[f.species],f,scale,y,1);
   
  }
@@ -87,8 +87,10 @@ function render(dt){g.clearRect(0,0,1600,900);
  // Rear glass and floor.
  poly([[L+DX,T+DY],[R+DX,T+DY],[R+DX,B+DY],[L+DX,B+DY]],state.night?'rgba(71,145,151,.09)':'rgba(168,211,211,.07)','#86a9aa',2);
  poly([[L,B],[L+DX,B+DY],[R+DX,B+DY],[R,B]],'rgba(128,178,177,.13)','#91b6b5',2);
- // Texture sources are displayed with a floor clip; original PNGs remain unchanged.
- if(state.bed!=='none'&&imgs[state.bed].complete&&imgs[state.bed].naturalWidth){g.save();poly([[L+4,B-28],[L+DX+3,B+DY-28],[R+DX-4,B+DY-28],[R-3,B-28],[R-3,B-3],[L+4,B-3]],null);g.clip();g.drawImage(imgs[state.bed],0,225,2172,305,L+2,B-103,R-L+DX-2,103);g.restore()}
+ // Side/rear glass precedes occupants; only the front frame overlays them.
+ poly([[L,T],[L+DX,T+DY],[L+DX,B+DY],[L,B]],'rgba(205,244,243,.035)','#99c5c7',2);
+ poly([[R,T],[R+DX,T+DY],[R+DX,B+DY],[R,B]],'rgba(104,182,193,.055)','#91bfc1',2);
+ drawSubstrate();
  const y=surface();
  if(state.level>.1){
   g.save();poly([[L+3,y],[L+DX,y+DY],[R+DX-3,y+DY],[R+DX-3,B+DY-2],[R-3,B-2],[L+3,B-2]],null);g.clip();
@@ -97,7 +99,7 @@ function render(dt){g.clearRect(0,0,1600,900);
   for(let i=0;i<6;i++){const x=280+i*210+Math.sin(t*.18+i)*25;poly([[x,y+DY],[x+35,y+DY],[x+180,B],[x+75,B]],gradient(0,y,0,B,[[0,'rgba(236,255,246,.075)'],[1,'rgba(236,255,246,0)']]))}
   // Gentle caustic ribbons at floor.
   g.save();g.globalCompositeOperation='screen';g.strokeStyle=state.night?'rgba(112,233,244,.19)':'rgba(238,255,225,.25)';g.lineWidth=1.2;
-  for(let j=0;j<6;j++){g.beginPath();for(let x=L;x<R+DX;x+=12){let yy=B-11-j*10+Math.sin(x*.024+t*.7+j)*4+Math.cos(x*.013-t*.5)*3;x===L?g.moveTo(x,yy):g.lineTo(x,yy)}g.stroke()}g.restore();
+  for(let j=0;j<6;j++){g.beginPath();for(let x=L;x<R+DX;x+=12){let yy=B-bedHeight()-3-j*9+Math.sin(x*.024+t*.7+j)*4+Math.cos(x*.013-t*.5)*3;x===L?g.moveTo(x,yy):g.lineTo(x,yy)}g.stroke()}g.restore();
 
   // Fine suspended particles.
   for(let i=0;i<38;i++){let x=L+20+(i*127.3+t*(i%2?2:-2))%(R-L-40),yy=B-((i*43+t*4)%(Math.max(1,B-y)));g.fillStyle='rgba(229,255,247,.26)';g.beginPath();g.arc(x,yy,.6+(i%3)*.3,0,7);g.fill()}
@@ -112,17 +114,15 @@ function render(dt){g.clearRect(0,0,1600,900);
   if(state.target>state.level+.1){g.strokeStyle='rgba(193,249,255,.65)';g.lineWidth=6;g.beginPath();g.moveTo(R-90,T-7);g.quadraticCurveTo(R-100,y-40,R-95+Math.sin(t*20)*2,y-7);g.stroke()}
  }
  g.save();poly([[L,T],[L+DX,T+DY],[R+DX,T+DY],[R+DX,B+DY],[R,B],[L,B]],null);g.clip();drawDecorWorld();g.restore();
- // Front and side glass remains clear.
- poly([[L,T],[L+DX,T+DY],[L+DX,B+DY],[L,B]],'rgba(205,244,243,.035)','#99c5c7',2);
- poly([[R,T],[R+DX,T+DY],[R+DX,B+DY],[R,B]],'rgba(104,182,193,.055)','#91bfc1',2);
+ // Near/front frame and subtle reflections.
  poly([[L,T],[R,T],[R,B],[L,B]],null,'#64999f',5);poly([[L,T],[R,T],[R,B],[L,B]],null,'#d8f7f5',1.5);
  line(L,T,L+DX,T+DY,'#e3ffff',2);line(L+DX,T+DY,R+DX,T+DY,'#cbeeed',2);line(R,T,R+DX,T+DY,'#e0ffff',2);
  poly([[L+6,T+6],[L+140,T+6],[L+6,T+170]],'rgba(255,255,255,.11)');line(R-9,T+12,R-9,B-12,'rgba(241,255,255,.32)',3);
 }
-function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;particles.push({x:R-100+Math.random()*17,y:B-7,r:1.3+Math.random()*3,seed:Math.random()*10,speed:28+Math.random()*32})}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();render(dt);requestAnimationFrame(step)}
+function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;particles.push({x:R-100+Math.random()*17,y:B-bedHeight()-7,r:1.3+Math.random()*3,seed:Math.random()*10,speed:28+Math.random()*32})}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();render(dt);requestAnimationFrame(step)}
 $('fill').onclick=()=>{state.target=100;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};$('drain').onclick=()=>{if(fish.length){notify('Đưa cá ra trước khi xả cạn hồ.');return}state.target=0;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};
-$('water').oninput=e=>{state.level=state.target=Math.max(fish.length?40:0,+e.target.value);ui()};$('waves').oninput=e=>state.waves=+e.target.value/100;
-document.querySelectorAll('[data-bed]').forEach(b=>b.onclick=()=>{state.bed=b.dataset.bed;document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x===b))});
+$('water').oninput=e=>{state.level=state.target=Math.max(minimumWater(),+e.target.value);ui()};$('waves').oninput=e=>state.waves=+e.target.value/100;
+
 for(const [id,key] of [['bubbles','bubbles'],['light','night']])$(id).onclick=()=>{state[key]=!state[key];$(id).classList.toggle('active',state[key]);$(id).setAttribute('aria-pressed',state[key]);if(id==='light')$(id).textContent=state.night?'Ban ngày':'Buổi tối'};
 $('pause').onclick=()=>{state.paused=!state.paused;$('pause').textContent=state.paused?'Tiếp tục hiệu ứng':'Tạm dừng hiệu ứng'};
 $('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else notify('Trình duyệt này chưa hỗ trợ toàn màn hình.')}catch{notify('Không mở được toàn màn hình trong chế độ xem này.')}};
