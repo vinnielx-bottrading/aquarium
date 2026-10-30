@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "B08_SIDE_v01": {
     "opening": [
       [
@@ -29,11 +29,11 @@
     ],
     "mouth": [
       0.1,
-      0.65
+      0.58
     ],
     "inside": [
       0.6,
-      0.65
+      0.58
     ],
     "defaultWidth": 600,
     "flip": "mirror X",

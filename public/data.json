@@ -66,42 +66,42 @@
     "id": "B03",
     "name": "Đá nhỏ (3 mẫu)",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 2
   },
   {
     "id": "B04",
     "name": "Đá lớn (2 mẫu)",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 3
   },
   {
     "id": "B05",
     "name": "Cụm đá khe trú",
     "status": "ready",
-    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách.",
+    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 3
   },
   {
     "id": "B06",
     "name": "Lũa thấp",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 2
   },
   {
     "id": "B07",
     "name": "Lũa phân nhánh",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 2
   },
   {
     "id": "B08",
     "name": "Hang đá",
     "status": "ready",
-    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách.",
+    "note": "v16: ảnh cửa trước chỉ trang trí, không dùng cho hành vi trú để tránh cá bơi xuyên vách. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 3
   },
   {
@@ -136,7 +136,7 @@
     "id": "B13",
     "name": "Bình gốm nghiêng",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 3
   },
   {
@@ -241,14 +241,14 @@
     "id": "E06",
     "name": "Máy sủi",
     "status": "ready",
-    "note": "v16: PNG/WebP đầu sủi đặt được; bọt phát từ đầu sủi khi ngập nước và Máy sủi bật.",
+    "note": "v16: PNG/WebP đầu sủi đặt được; bọt phát từ đầu sủi khi ngập nước và Máy sủi bật. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 1
   },
   {
     "id": "E07",
     "name": "Bộ lọc",
     "status": "ready",
-    "note": "v16: PNG/WebP bộ lọc đặt được; dòng nước nhẹ có bật/tắt. Chưa mô phỏng chất lượng nước.",
+    "note": "v16: PNG/WebP bộ lọc đặt được; dòng nước nhẹ có bật/tắt. Chưa mô phỏng chất lượng nước. v17: cá tránh vùng vật cứng khi bơi và tìm thức ăn.",
     "cycle": 1
   },
   {
@@ -471,8 +471,8 @@
   {
     "id": "S01",
     "name": "Rừng sương",
-    "status": "prototype",
-    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "status": "ready",
+    "note": "v18: hai ảnh nền PNG/WebP ngày và đêm, màu nước xanh rêu ban ngày, ánh trăng xanh dịu ban đêm; xử lý ánh sáng chung cho cá, đồ trang trí và kính.",
     "cycle": 2
   },
   {
@@ -513,7 +513,7 @@
   {
     "id": "B08_SIDE",
     "name": "Hang đá cửa ngang",
-    "note": "v16: cửa trái/phải, che khuất bằng vách đá; cá giữ kích thước và độ rõ khi chui vào.",
+    "note": "v16: cửa trái/phải, che khuất bằng vách đá; cá giữ kích thước và độ rõ khi chui vào. v17: tìm đường tới cửa, không vào khi hành lang bị chắn.",
     "status": "ready",
     "cycle": 3
   }

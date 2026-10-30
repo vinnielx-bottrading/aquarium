@@ -31,7 +31,7 @@ async function enterFull(){
 }
 async function exitFull(){try{if(document.fullscreenElement)await document.exitFullscreen()}catch{}stage.classList.remove('expanded');fullUI();$('full').focus()}
 $('full').onclick=enterFull;$('exitFull').onclick=exitFull;document.addEventListener('fullscreenchange',fullUI);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&stage.classList.contains('expanded'))exitFull()});
-selectTool('feed');feedingUI();requestAnimationFrame(step);
+sampleFish();ui();selectTool('feed');feedingUI();requestAnimationFrame(step);
 
 $('filterPower').onclick=()=>{state.filterPower=!state.filterPower;$('filterPower').setAttribute('aria-pressed',state.filterPower);$('filterPower').textContent='Bộ lọc: '+(state.filterPower?'bật':'tắt')};
 function drawFilterFlow(){if(!state.filterPower)return;g.save();g.strokeStyle='rgba(174,235,230,.32)';g.lineWidth=1.4;for(const o of decorations.filter(o=>o.type==='E07_v01')){const h=Math.min(o.width*1.86196319,270),dir=o.flip?1:-1,x=o.x+dir*o.width*.45,y=o.y-h*.75;if(y<surface()+6)continue;for(let k=0;k<3;k++){g.beginPath();for(let j=0;j<=24;j++){const px=x+dir*j*3,py=y+(k-1)*5+Math.sin(j*.25-t*3+k)*2;j?g.lineTo(px,py):g.moveTo(px,py)}g.stroke()}}g.restore()}

@@ -12,12 +12,12 @@ const Feeding=(()=>{
  function tick(s,all,dt,level,height){
   s.cooldown=Math.max(0,s.cooldown-dt);
   for(const p of s.pellets){p.age+=dt;p.y+=p.speed*dt;p.x=clamp(p.x+Math.sin(p.age*1.5+p.seed)*dt*3,260,1250)}
-  s.pellets=s.pellets.filter(p=>p.age<32&&p.y<700-height-65*p.depth-5&&p.y>=700-level*4.2&&level>=2);
+  s.pellets=s.pellets.filter(p=>(typeof FishAvoid==='undefined'||FishAvoid.pelletClear(p))&&p.age<32&&p.y<700-height-65*p.depth-5&&p.y>=700-level*4.2&&level>=2);
   const reserved=new Set();
   for(const f of all){f.eatCooldown=Math.max(0,(f.eatCooldown||0)-dt);const current=s.pellets.find(p=>p.id===f.foodTarget);if(!current||reserved.has(current.id)||f.eatCooldown>0){if(f.foodTarget!=null)f.timer=0;f.foodTarget=null}else reserved.add(current.id)}
   for(const f of all){
    if(f.eatCooldown>0)continue;const b=FishMotion.bounds(f,level,height);
-   const reachable=p=>p.y>=b.top-5&&p.y<=b.bottom+5&&p.x>=b.left+f.size*.3&&p.x<=b.right-f.size*.3;
+   const reachable=p=>(typeof FishAvoid==='undefined'||FishAvoid.foodReachable(f,p,level,height))&&p.y>=b.top-5&&p.y<=b.bottom+5&&p.x>=b.left+f.size*.3&&p.x<=b.right-f.size*.3;
    let p=s.pellets.find(p=>p.id===f.foodTarget);
    if(p&&!reachable(p)){reserved.delete(p.id);f.foodTarget=null;p=null;f.timer=0}
    if(!p){p=s.pellets.filter(p=>!reserved.has(p.id)&&reachable(p)&&Math.hypot(p.x-f.x,p.y-f.y)<650).sort((a,b)=>Math.hypot(a.x-f.x,a.y-f.y)-Math.hypot(b.x-f.x,b.y-f.y))[0];if(p){f.foodTarget=p.id;reserved.add(p.id)}}
@@ -28,9 +28,12 @@ const Feeding=(()=>{
   const p=s.pellets.find(p=>p.id===f.foodTarget);if(!p||f.shelter)return false;
   const b=FishMotion.bounds(f,level,height);f.swimClock+=dt*.9;f.vx=f.vy=0;f.pitch*=Math.exp(-dt*5);
   if(f.turn>0){f.turn=Math.max(0,f.turn-dt/.85);if(!f.turn)f.dir*=-1;return true}
-  const dx=p.x-f.x;if(Math.abs(dx)>f.size*.18&&Math.sign(dx)!==f.dir){f.turn=1;return true}
-  const tx=clamp(p.x-f.dir*f.size*.29,b.left,b.right),ty=clamp(p.y,b.top,b.bottom),vx=tx-f.x,vy=ty-f.y,dist=Math.hypot(vx,vy),q=Math.min(1,90*dt/(dist||1));
-  f.x=clamp(f.x+vx*q,b.left,b.right);f.y=clamp(f.y+vy*q,b.top,b.bottom);
+  const approach=Math.abs(p.x-f.x)>f.size*.18?Math.sign(p.x-f.x):f.dir;
+  const goal={x:clamp(p.x-approach*f.size*.29,b.left,b.right),y:clamp(p.y,b.top,b.bottom)};
+  const target=typeof FishAvoid!=='undefined'?FishAvoid.target(f,goal,level,height):goal,dx=target.x-f.x;
+  if(Math.abs(dx)>8&&Math.sign(dx)!==f.dir){f.turn=1;return true}
+  const vx=target.x-f.x,vy=target.y-f.y,dist=Math.hypot(vx,vy),q=Math.min(1,90*dt/(dist||1)),next={x:f.x+vx*q,y:f.y+vy*q};
+  if(typeof FishAvoid!=='undefined')FishAvoid.move(f,next,level,height);else{f.x=next.x;f.y=next.y}
   if(Math.hypot(p.x-(f.x+f.dir*f.size*.29),p.y-f.y)<10){s.pellets=s.pellets.filter(a=>a.id!==p.id);s.eaten++;f.foodTarget=null;f.eatCooldown=3;f.shelterCooldown=12;f.timer=0;f.bites=(f.bites||0)+1}
   return true;
  }

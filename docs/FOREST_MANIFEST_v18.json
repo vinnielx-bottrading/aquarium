@@ -1,0 +1,25 @@
+{
+  "version": 18,
+  "registryId": "S01",
+  "source": "Built-in Imagegen",
+  "assets": [
+    {
+      "id": "D_FOREST_DAY_v01",
+      "file": "public/assets/D_FOREST_DAY_v01.png",
+      "runtime": "public/assets/D_FOREST_DAY_v01.webp",
+      "role": "day background"
+    },
+    {
+      "id": "D_FOREST_NIGHT_v01",
+      "file": "public/assets/D_FOREST_NIGHT_v01.png",
+      "runtime": "public/assets/D_FOREST_NIGHT_v01.webp",
+      "role": "matching night background"
+    }
+  ],
+  "render": "1600x900 composition; original source retained; tank drawn separately then color graded via forest-light.js",
+  "limitations": [
+    "Static environment image; no animated foliage",
+    "Color grading is artistic, not physical lighting",
+    "Mountain/ocean/Everest remain Canvas prototypes"
+  ]
+}
