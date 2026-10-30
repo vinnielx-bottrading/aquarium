@@ -1,12 +1,12 @@
 {
   "name": "aquarium-2-5d",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "private": true,
   "scripts": {
-    "build": "node scripts/check.cjs && node scripts/test-motion.cjs && node scripts/test-habitat.cjs && node scripts/test-feeding.cjs && node scripts/test-avoidance.cjs",
-    "test": "node scripts/check.cjs && node scripts/test-motion.cjs && node scripts/test-habitat.cjs && node scripts/test-feeding.cjs && node scripts/test-avoidance.cjs",
+    "build": "node scripts/check.cjs && node scripts/test-motion.cjs && node scripts/test-habitat.cjs && node scripts/test-feeding.cjs && node scripts/test-avoidance.cjs && node scripts/test-plants.cjs",
+    "test": "node scripts/check.cjs && node scripts/test-motion.cjs && node scripts/test-habitat.cjs && node scripts/test-feeding.cjs && node scripts/test-avoidance.cjs && node scripts/test-plants.cjs",
     "start": "node scripts/serve.cjs",
-    "export": "node scripts/export.cjs"
+    "export": "node scripts/export.cjs && node scripts/gallery.cjs"
   },
   "engines": {
     "node": ">=20"

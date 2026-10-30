@@ -7,7 +7,7 @@ function layoutFits(level=state.level){FishAvoid.configure(decorations,DECOR_ITE
 function saveDecor(){if(!layoutFits()&&decorHistory.length){const old=JSON.parse(decorHistory.pop());decorations=old.items;state.bed=old.bed;state.bedHeight=old.bedHeight;selectedDecor=null;layoutFits();notify('Không đủ chỗ cho cá. Đã giữ bố cục trước đó.')}FishAvoid.configure(decorations,DECOR_ITEMS);for(const f of fish)FishAvoid.prepare(f,0,state.level,bedHeight());try{localStorage.setItem('aquarium-layout-v12',JSON.stringify({items:decorations,bed:state.bed,bedHeight:state.bedHeight,version:17}));$('decorHint').textContent='Đã lưu bố cục trên trình duyệt này.'}catch{$('decorHint').textContent='Không lưu được; bố cục chỉ giữ trong phiên này.'}decorUI();bedUI()}
 function decorUI(){$('decorCount').textContent=decorations.length+' / 24 vật';const o=decorations.find(o=>o.id===selectedDecor);$('removeDecor').disabled=!o;$('flipDecor').disabled=!o;$('decorSize').disabled=!o;$('undoDecor').disabled=!decorHistory.length;if(o)$('decorSize').value=o.width;c.classList.toggle('decorating',!!placing||!$('trayBody').hidden);document.querySelectorAll('.decor-card').forEach(b=>b.classList.toggle('active',b.dataset.item===placing))}
 function addDecor(type,x,y){if(decorations.length>=24){notify('Tối đa 24 vật trang trí.');return}const item=DECOR_ITEMS.find(i=>i.id===type);if(!item)return;decorSnapshot();const o=constrainDecor({id:Date.now()+Math.random(),type,x,y,width:item.width});decorations.push(o);selectedDecor=o.id;placing=null;saveDecor()}
-function drawDecor(o,selection=true){const im=decorImages[o.type],spec=DECOR_ITEMS.find(i=>i.id===o.type);if(!im.complete||!im.naturalWidth)return;const h=Math.min(o.width*spec.ratio,270);g.save();g.globalAlpha=1;if(state.night&&scene!=='forest')g.filter="brightness(.68)";g.translate(o.x,o.y);g.scale(o.flip?-1:1,1);if(spec.crop)g.drawImage(im,...spec.crop,-o.width/2,-h,o.width,h);else g.drawImage(im,-o.width/2,-h,o.width,h);g.restore();if(selection&&o.id===selectedDecor&&!$('trayBody').hidden){g.save();g.strokeStyle='#a5efbd';g.lineWidth=2;g.setLineDash([5,4]);g.strokeRect(o.x-o.width/2-4,o.y-h-4,o.width+8,h+8);g.restore()}}
+function drawDecor(o,selection=true){const im=decorImages[o.type],spec=DECOR_ITEMS.find(i=>i.id===o.type);if(!im.complete||!im.naturalWidth)return;const h=Math.min(o.width*spec.ratio,270);g.save();g.globalAlpha=1;if(state.night&&scene!=='forest')g.filter="brightness(.68)";g.translate(o.x,o.y);g.scale(o.flip?-1:1,1);if(spec.category==='plant'&&state.plantMotion){drawPlant(im,o,spec,h)}else if(spec.crop)g.drawImage(im,...spec.crop,-o.width/2,-h,o.width,h);else g.drawImage(im,-o.width/2,-h,o.width,h);g.restore();if(selection&&o.id===selectedDecor&&!$('trayBody').hidden){g.save();g.strokeStyle='#a5efbd';g.lineWidth=2;g.setLineDash([5,4]);g.strokeRect(o.x-o.width/2-4,o.y-h-4,o.width+8,h+8);g.restore()}}
 function shelterDoors(){return decorations.map(o=>Shelter.describe(o,DECOR_ITEMS.find(i=>i.id===o.type),bedHeight())).filter(Boolean)}
 function updateShelter(f,dt){return Shelter.update(f,dt,shelterDoors(),fish,state.level,bedHeight())}
 function evictShelter(id){for(const f of fish)if(f.shelter&&(id===undefined||f.shelter.id===id))Shelter.release(f,state.level,bedHeight())}
@@ -17,6 +17,7 @@ function drawShelter(o,residents){
  if(o.id===selectedDecor&&!$('trayBody').hidden){const h=Math.min(o.width*DECOR_ITEMS.find(i=>i.id===o.type).ratio,270);g.save();g.strokeStyle='#a5efbd';g.setLineDash([5,4]);g.strokeRect(o.x-o.width/2,o.y-h,o.width,h);g.restore()}
 }
 function drawDecorWorld(){
+ plantOutlets=state.filterPower?decorations.filter(o=>o.type==='E07_v01').map(o=>PlantMotion.outlet(o)):[];
  const grouped=f=>f.shelter&&f.shelter.mode!=='seeking';const all=[...decorations.map(o=>({depth:o.depth,o})),...food.pellets.map(p=>({depth:p.depth,p})),...fish.filter(f=>!grouped(f)).map(f=>({depth:f.depth,f}))].sort((a,b)=>b.depth-a.depth);
  for(const e of all){if(e.o){const residents=fish.filter(f=>grouped(f)&&f.shelter.id===e.o.id);residents.length?drawShelter(e.o,residents):drawDecor(e.o)}else if(e.p)drawFoodPellet(e.p);else drawFish([e.f])}
  const labels={seeking:'đến cửa hang',entering:'chui vào hang',resting:'nghỉ trong hang',turning:'quay đầu trong hang',exiting:'bơi ra khỏi hang'};
@@ -50,3 +51,16 @@ $('tryShelter').onclick=()=>{
  if(matched){state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng';notify('Cá đang bơi tới cửa hang; chờ cá vào, nghỉ rồi ra.')}else notify(doors.length?'Hang đang có cá, cửa bị đồ vật chắn hoặc chưa đủ chỗ. Dọn lối cửa, tăng cỡ hang hoặc bơm thêm nước.':'Đặt Hang đá cửa ngang vào hồ trước nhé.');
 };
 ensureWater();updateFishUI();bedUI();decorUI();
+
+function drawPlant(im,o,spec,h){
+ const crop=spec.crop||[0,0,im.naturalWidth,im.naturalHeight];
+ const env={enabled:state.plantMotion,level:state.level,surface:surface(),waves:state.waves,outlets:plantOutlets};
+ const flip=o.flip?-1:1;
+ for(const b of PlantMotion.bands(o,spec,h,t,env)){
+  const dy=-h+h*b.v0,dh=h*(b.v1-b.v0),x0=b.x0*flip,x1=b.x1*flip;
+  g.save();g.translate(x0,dy);g.transform(1,0,(x1-x0)/dh,1,0,0);
+  g.drawImage(im,crop[0],crop[1]+crop[3]*b.v0,crop[2],crop[3]*(b.v1-b.v0),-o.width/2,0,o.width,dh+.18);g.restore();
+ }
+}
+let plantOutlets=[];
+$('plantMotion').onclick=()=>{state.plantMotion=!state.plantMotion;$('plantMotion').setAttribute('aria-pressed',state.plantMotion);$('plantMotion').textContent='Cây đung đưa: '+(state.plantMotion?'bật':'tắt')};

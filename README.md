@@ -1,5 +1,19 @@
-# Aquarium v18 — Rừng sương ngày và đêm
+# Aquarium v19 — Cây thủy sinh và rêu chuyển động
 Cập nhật 30/10/2026. Giữ nguyên hai loài Ngọc Lam, Đuôi Nắng. Thêm hang cửa ngang, đầu sủi và bộ lọc.
+
+
+## Mới trong v19
+- Sáu asset cây/rêu hiện có (B09 hai mẫu, B10 hai mẫu, B11 thảm cỏ, B12 rêu) đung đưa nhẹ, mỗi vật lệch pha. Gốc/viền bám cố định; rêu có biên độ nhỏ hơn cây cao.
+- Tác động vòi lọc phụ thuộc hướng, khoảng cách và độ cao. Lật bộ lọc đổi hướng dòng; bộ lọc khô hoặc tắt không tác động. Không có bộ lọc vẫn có dao động nền nhẹ.
+- Phần nằm trên mặt nước giữ yên. Xả cạn dừng uốn; thời gian dùng chung với game nên Tạm dừng dừng cả cây. Nút **Cây đung đưa: bật/tắt** nằm ở Không gian. Tắt trả sprite về hình gốc. Cài đặt hiệu ứng chưa lưu giữa phiên.
+- Để xem: Trang trí → Cây & rêu → chọn cây → chạm đáy hồ. Đặt Bộ lọc từ mục Thiết bị ở bên phải cây, vòi quay về cây; so sánh bật/tắt. Có thể đổi sang Rừng sương, Buổi tối và Toàn màn hình.
+- Chỉ sửa cách vẽ cây: vùng cản, thứ tự độ sâu cá/cây, mặt nạ hang và dữ liệu bố cục giữ nguyên. Các gốc nâng/hạ theo nền như trước.
+- Đây là uốn sprite theo dải, không phải mô phỏng thủy động lực hoặc chuyển động riêng từng lá; dòng không tính bóng chắn sau đá. Chưa đo FPS trên điện thoại thật.
+
+## Phần bối cảnh chưa hoàn tất
+**Núi, đại dương và Everest vẫn là phác thảo.** Lượt tạo ảnh chính thức bị chặn do công cụ Imagegen hết hạn mức; không có ảnh mới nào được tạo trong v19. Không đánh dấu hoàn tất và chưa đổi ánh sáng các cảnh này. Trong nhà và Rừng sương được giữ nguyên.
+
+Đã ghi brief sáu ảnh ngày/đêm và các bước còn lại tại `docs/SCENES_PENDING_v19.md`. Khi tạo ảnh được trở lại, tiếp tục từ bản v19 này; không quay lại v18 để tránh mất hiệu ứng cây.
 
 ## Bối cảnh rừng v18
 Chọn **Bối cảnh → Rừng sương**. Bấm **Buổi tối / Ban ngày** để chuyển giữa hai ảnh nền cùng bố cục. Toàn màn hình hoạt động như trước.
@@ -7,7 +21,7 @@ Chọn **Bối cảnh → Rừng sương**. Bấm **Buổi tối / Ban ngày** �
 - Hai ảnh nền chính thức: rừng ban ngày và rừng đêm. PNG nguồn và WebP trong public/assets; xem docs/FOREST_MANIFEST_v18.json và docs/FOREST_PROMPTS_v18.md.
 - Ban ngày: nước xanh rêu nhẹ, ánh nắng ấm từ góc trái; ban đêm: nước xanh lạnh, ánh trăng dịu, giữ phát quang Ngọc Lam.
 - Hồ được vẽ trên một lớp riêng rồi chỉnh màu/sáng đồng bộ cho cá, nền, vật trang trí, chân bể và kính. Độ che khuất hang giữ nguyên; không làm đá trong suốt. Ánh sáng rừng không ảnh hưởng cảnh khác.
-- Nền rừng tĩnh, chưa có lá/rêu lay động. Ánh sáng là xử lý mỹ thuật 2.5D, không phải mô phỏng vật lý. Chưa thử trên điện thoại thật.
+- Nền rừng tĩnh; cây/rêu đặt trong hồ chuyển động từ v19. Ánh sáng là xử lý mỹ thuật 2.5D, không phải mô phỏng vật lý. Chưa thử trên điện thoại thật.
 - Giữ hai loài cá và toàn bộ tránh vật cản v17. Ba bối cảnh còn lại vẫn là phác thảo.
 
 ## Chơi
@@ -48,11 +62,11 @@ Hai mẫu B05/B08 cũ chỉ còn là trang trí, không dùng để trú. Bố c
 - Tổng cộng 19 vật có thể đặt, thêm 2 lựa chọn nền. Giữ đúng hai loài cá.
 
 ## Phạm vi
-Đây là mô phỏng 2.5D. Vật cứng dùng vùng bao chữ nhật bảo thủ; chưa bám sát từng nhánh lũa hoặc từng viên đá, chưa có tránh cá khác. Cây là sprite tĩnh. Chưa có sinh sản hoặc sprite há miệng riêng; hành vi ăn dùng bộ bơi/quay đầu sẵn có. Trong nhà và rừng có ảnh nền; núi, đại dương và Everest vẫn là phác thảo Canvas.
+Đây là mô phỏng 2.5D. Vật cứng dùng vùng bao chữ nhật bảo thủ; chưa bám sát từng nhánh lũa hoặc từng viên đá, chưa có tránh cá khác. Cây/rêu dùng sprite uốn bằng mã; chưa có mô phỏng từng chiếc lá. Chưa có sinh sản hoặc sprite há miệng riêng; hành vi ăn dùng bộ bơi/quay đầu sẵn có. Trong nhà và rừng có ảnh nền; núi, đại dương và Everest vẫn là phác thảo Canvas.
 
 ## GitHub / Vercel
 Giải nén và đưa nội dung thư mục có package.json lên GitHub (không upload nguyên ZIP để deploy). Vercel: Framework Other, Build `npm run build`, Output `public`. Không cần API key. Chưa triển khai lên tài khoản Vercel của bạn. Hướng dẫn cũ chi tiết giữ tại docs/README_v11.md.
 
-`npm test` kiểm tra mã, sprite, asset và hành vi. `npm run export` tạo exports/Aquarium_Play_v18.html độc lập, dùng WebP tối ưu, mở trực tiếp trong trình duyệt máy tính. public/assets giữ cả PNG nguồn và WebP; không cần công cụ chuyển ảnh để xuất lại.
+`npm test` kiểm tra mã, sprite, asset và hành vi. `npm run export` tạo exports/Aquarium_Play_v19.html độc lập, dùng WebP tối ưu, mở trực tiếp trong trình duyệt máy tính. public/assets giữ cả PNG nguồn và WebP; không cần công cụ chuyển ảnh để xuất lại.
 
-Danh mục mới: public/progress.html, public/data.json, docs/ASSET_REGISTER_v18.csv. Vùng cửa: docs/SHELTER_MASKS.json. Các bản cũ và nguồn asset giữ trong archive/; tư liệu v11–v13 chỉ mang tính lịch sử.
+Danh mục mới: public/progress.html, public/data.json, docs/ASSET_REGISTER_v19.csv. Vùng cửa: docs/SHELTER_MASKS.json. Các bản cũ và nguồn asset giữ trong archive/; tư liệu v11–v13 chỉ mang tính lịch sử.

@@ -1,0 +1,26 @@
+{
+  "version": 19,
+  "source": "Canvas code using existing sprites; no new generated imagery",
+  "module": "public/plant-motion.js",
+  "renderer": "public/decor.js",
+  "assets": [
+    "B09_01_v01",
+    "B09_02_v01",
+    "B10_01_v01",
+    "B10_02_v01",
+    "B11_v01",
+    "B12_v01"
+  ],
+  "controls": [
+    "plantMotion",
+    "filterPower",
+    "pause"
+  ],
+  "tests": "scripts/test-plants.cjs",
+  "limitations": [
+    "18 horizontal bands per plant, not per-leaf physics",
+    "No obstacle shadow in filter influence",
+    "Background foliage remains static",
+    "Mountain/ocean/Everest final art blocked by Imagegen usage limit"
+  ]
+}

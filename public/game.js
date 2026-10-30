@@ -8,7 +8,7 @@ ASSETS.blueTurn='assets/C01_TURN.png';
 ASSETS.goldTurn='assets/C02_TURN.png';
 const c=document.getElementById('tank'),mainG=c.getContext('2d'),$=id=>document.getElementById(id);
 let g=mainG;const forestTank=document.createElement('canvas');forestTank.width=1600;forestTank.height=900;const forestG=forestTank.getContext('2d');
-const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,filterPower:true,night:false,waves:.35,paused:false,sound:false};
+const state={level:100,target:100,bed:'sand',bedHeight:24,bubbles:true,filterPower:true,plantMotion:true,night:false,waves:.35,paused:false,sound:false};
 const imgs={};for(const [k,v] of Object.entries(ASSETS)){const im=new Image();im.src=v;imgs[k]=im}
 const food=Feeding.create();
 let fish=[],nextFishId=0;

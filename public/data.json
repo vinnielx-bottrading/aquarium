@@ -108,28 +108,28 @@
     "id": "B09",
     "name": "Cây thấp (2 mẫu)",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v19: Đã tích hợp chuyển động uốn nhẹ, gốc cố định, lệch pha theo từng bụi; phản ứng vòi lọc và chỉ chuyển động dưới nước. Có nút bật/tắt. Chưa khóa theo ngày chơi.",
     "cycle": 2
   },
   {
     "id": "B10",
     "name": "Cây cao (2 mẫu)",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v19: Đã tích hợp chuyển động uốn nhẹ, gốc cố định, lệch pha theo từng bụi; phản ứng vòi lọc và chỉ chuyển động dưới nước. Có nút bật/tắt. Chưa khóa theo ngày chơi.",
     "cycle": 2
   },
   {
     "id": "B11",
     "name": "Thảm cỏ",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v19: Đã tích hợp chuyển động uốn nhẹ, gốc cố định, lệch pha theo từng bụi; phản ứng vòi lọc và chỉ chuyển động dưới nước. Có nút bật/tắt. Chưa khóa theo ngày chơi.",
     "cycle": 2
   },
   {
     "id": "B12",
     "name": "Rêu bám",
     "status": "ready",
-    "note": "v13: Đã có asset và tích hợp vào game. Chọn trong khay trang trí; dùng ngay, chưa áp dụng khóa theo chu kỳ.",
+    "note": "v19: Đã tích hợp chuyển động uốn nhẹ, gốc cố định, lệch pha theo từng bụi; phản ứng vòi lọc và chỉ chuyển động dưới nước. Có nút bật/tắt. Chưa khóa theo ngày chơi.",
     "cycle": 2
   },
   {
@@ -479,21 +479,21 @@
     "id": "S02",
     "name": "Thung lũng núi",
     "status": "prototype",
-    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
     "cycle": 3
   },
   {
     "id": "S03",
     "name": "Đài quan sát đại dương",
     "status": "prototype",
-    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
     "cycle": 4
   },
   {
     "id": "S04",
     "name": "Trạm kính Everest",
     "status": "prototype",
-    "note": "Phác thảo Canvas có thể xem thử. Chưa có ảnh nền hoàn chỉnh.",
+    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
     "cycle": 5
   },
   {

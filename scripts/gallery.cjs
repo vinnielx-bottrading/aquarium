@@ -1,0 +1,12 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),pub=path.join(root,'public');
+const items=vm.runInNewContext(fs.readFileSync(path.join(pub,'decor-data.js'),'utf8')+';DECOR_ITEMS');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const image=file=>'data:image/webp;base64,'+fs.readFileSync(path.join(pub,file.replace(/\.png$/,'.webp'))).toString('base64');
+const card=(name,file)=>'<article><img alt="'+esc(name)+'" src="'+image(file)+'"><p>'+esc(name)+'</p></article>';
+let html='<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Asset v19</title><style>body{background:#eef3ed;color:#173c38;font:16px system-ui;margin:4vw}section{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}article{background:white;border-radius:16px;padding:16px}img{width:100%;height:150px;object-fit:contain}table{border-collapse:collapse;background:white;width:100%}td,th{padding:12px;border-bottom:1px solid #ddd;text-align:left}.table{overflow:auto}</style><h1>hồ. · Asset v19</h1><p>19 vật đặt được + cát/sỏi. Giữ hai loài: Ngọc Lam và Đuôi Nắng.</p><p>Mới: sáu mẫu cây/cỏ/rêu đung đưa trong game, gốc cố định, phản ứng theo vòi lọc. Ảnh trong danh sách này là hình tĩnh.</p><p><b>Chưa hoàn tất:</b> nền núi, biển, Everest ngày/đêm đang chờ tạo ảnh do hạn mức Imagegen. Ba cảnh vẫn là phác thảo.</p><h2>Đồ trang trí</h2><section>';
+html+=items.map(i=>card(i.name,i.src)).join('')+'</section><h2>Cá và nền hồ</h2><section>';
+for(const [name,file] of [['Ngọc Lam','blue'],['Đuôi Nắng','gold'],['Cát','sand'],['Sỏi','gravel']])html+=card(name,'assets/'+file+'.png');
+html+='</section><h2>Rừng sương — đã hoàn thiện từ v18</h2><section>'+card('Ban ngày','assets/D_FOREST_DAY_v01.png')+card('Ban đêm','assets/D_FOREST_NIGHT_v01.png')+'</section><h2>Danh mục theo dõi</h2><p>ready = đã tích hợp; prototype = bản thử; planned = chưa làm.</p><div class="table"><table><thead><tr><th>Mã</th><th>Asset</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead><tbody>';
+for(const r of JSON.parse(fs.readFileSync(path.join(pub,'data.json'))))html+='<tr>'+[r.id,r.name,r.status,r.note].map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>';
+html+='</tbody></table></div></html>';fs.mkdirSync(path.join(root,'exports'),{recursive:true});fs.writeFileSync(path.join(root,'exports/Aquarium_Assets_v19.html'),html);console.log('exports/Aquarium_Assets_v19.html');
