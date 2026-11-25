@@ -7,7 +7,7 @@ const Shelter=(()=>{
   return {id:o.id,signature:[o.x,o.y,o.width,o.flip,height].join(','),depth:o.depth,mouth:map([.10,.58]),inside:map([.60,.58]),points:[[.035,.38],[.09,.30],[.145,.43],[.16,.79],[.11,.91],[.035,.88]].map(map),w,h,flip,height,top:o.y-h,floor:700-height-65*o.depth,capacity:h*.70};
  }
  function entry(f,d){return {x:d.mouth.x-d.flip*(d.w*.10+f.size*.62+8),y:d.mouth.y}}
- function eligible(f,d,level){if(!d)return false;const e=entry(f,d),b=FishMotion.bounds(f,level,d.height),route=(f.x-e.x)*d.flip>0;
+ function eligible(f,d,level){if(!d||f.species==='shark')return false;const e=entry(f,d),b=FishMotion.bounds(f,level,d.height),route=(f.x-e.x)*d.flip>0;
   return (typeof FishAvoid==='undefined'||FishAvoid.corridor(f,d))&&d.capacity>=f.size*.625&&d.w*.36>f.size*.5&&d.mouth.y-f.size*.32>700-420*level/100+8&&d.mouth.y+f.size*.32<d.floor-2&&e.x>=b.left&&e.x<=b.right&&e.y>=b.top&&e.y<=b.bottom&&(!route||f.shelter?.id===d.id||d.top-f.size*.32-20>=b.top)}
  function start(f,d){const e=entry(f,d),routeY=d.top-f.size*.32-20,needsRoute=(f.x-e.x)*d.flip>0;
   f.shelter={id:d.id,signature:d.signature,mode:'seeking',age:0,side:d.flip,entry:e,mouth:d.mouth,route:needsRoute?[{x:f.x,y:routeY},{x:e.x,y:routeY},e]:[e]};f.renderScale=1;f.shelterShade=1;f.turn=0;f.vx=f.vy=0;return f.shelter}

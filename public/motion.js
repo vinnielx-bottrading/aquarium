@@ -4,6 +4,12 @@ const FishMotion=(()=>{
 
  function init(f,level,r=Math.random,height=0){const b=bounds(f,level,height);f.y=b.top+(b.bottom-b.top)*f.lane;f.vx=0;f.vy=0;f.pitch=0;f.swimClock=r()*10;f.behavior='cruise';f.timer=0;f.cooldown=0;f.energy=.75+r()*.5;f.tx=f.x;f.ty=f.y}
  function choose(f,b,r,env){const q=r();f.behavior=q<.23?'rest':q<.42?'rise':q<.60?'dive':q<.71?'dart':'cruise';f.timer=f.behavior==='rest'?1+r()*3:3+r()*6;f.tx=clamp(f.x+(r()-.5)*850,b.left,b.right);f.ty=b.top+r()*(b.bottom-b.top);if(f.behavior==='rise')f.ty=b.top+8+r()*(b.bottom-b.top)*.2;if(f.behavior==='dive')f.ty=b.bottom-8-r()*(b.bottom-b.top)*.2;if(f.behavior==='rest'){f.tx=f.x;f.ty=f.y}f.pace=(f.behavior==='dart'?65:22+r()*27)*f.energy;
+ if(f.species==='shark'){
+ // Reef shark cruises in open water, with a steady full tail-beat cycle.
+ f.behavior='cruise';f.intent='open';f.timer=4+r()*7;f.pace=(30+r()*18)*f.energy;
+ f.tx=clamp(f.x+(r()<.82?f.dir:-f.dir)*(180+r()*420),b.left,b.right);
+ f.ty=b.top+(b.bottom-b.top)*(.22+r()*.65);return;
+ }
  if(env){
  const blue=f.species==='blue',active=blue?env.night:!env.night,span=b.bottom-b.top;
  f.temperament??=.85+r()*.3;

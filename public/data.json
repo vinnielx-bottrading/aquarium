@@ -154,13 +154,6 @@
     "cycle": 0
   },
   {
-    "id": "C03",
-    "name": "Cá Sọc Rêu",
-    "status": "planned",
-    "note": "Tạm hoãn theo yêu cầu; hiện chỉ triển khai Ngọc Lam và Đuôi Nắng.",
-    "cycle": 4
-  },
-  {
     "id": "C04",
     "name": "Cá Vây Đỏ",
     "status": "planned",
@@ -516,5 +509,20 @@
     "note": "v16: cửa trái/phải, che khuất bằng vách đá; cá giữ kích thước và độ rõ khi chui vào. v17: tìm đường tới cửa, không vào khi hành lang bị chắn.",
     "status": "ready",
     "cycle": 3
+  },
+  {
+    "id": "C03",
+    "name": "Cá Sọc Rêu",
+    "status": "planned",
+    "note": "Tạm hoãn; chưa triển khai.",
+    "cycle": 4
+  },
+  {
+    "id": "C_REEF",
+    "name": "Cá mập rạn — Reef Shark",
+    "status": "ready",
+    "note": "Mô hình Polyfork, CC BY 4.0. 12 khung bơi và 6 góc quay. Tránh vật cứng; không trú hang, không săn cá.",
+    "category": "fish",
+    "cycle": 0
   }
 ]

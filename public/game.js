@@ -8,6 +8,8 @@ ASSETS.everestDay='assets/everestDay.png';
 ASSETS.everestNight='assets/everestNight.png';
 ASSETS.forestDay='assets/D_FOREST_DAY_v01.png';
 ASSETS.forestNight='assets/D_FOREST_NIGHT_v01.png';
+ASSETS.sharkSwim='assets/C03_SWIM.png';
+ASSETS.sharkTurn='assets/C03_TURN.png';
 ASSETS.goldSwim='assets/C02_SWIM.png';
 ASSETS.blueSwim='assets/C01_SWIM.png';
 ASSETS.blueTurn='assets/C01_TURN.png';
@@ -26,14 +28,14 @@ function gradient(x,y,x2,y2,stops){const q=g.createLinearGradient(x,y,x2,y2);sto
 function addFish(species,quiet=false){
  if(fish.length>=12){if(!quiet)notify('Hồ thử chứa tối đa 12 cá.');return}
  if(state.level<40){if(!quiet)notify('Bơm nước lên ít nhất 40% rồi thả cá nhé.');return}
- const depth=Math.random(),size=(species==='blue'?175:190)*(1-depth*.24);
+ const depth=Math.random(),size=({blue:175,gold:190,shark:300}[species]||175)*(1-depth*.24);
  fish.push({id:nextFishId++,species,x:300+Math.random()*900,dir:Math.random()<.5?-1:1,turn:0,depth,size,phase:Math.random()*Math.PI*2,speed:22+Math.random()*22,lane:.2+Math.random()*.6,glow:state.night?1:0});
  ensureWater();FishMotion.init(fish[fish.length-1],state.level,Math.random,bedHeight());
  FishAvoid.configure(decorations,DECOR_ITEMS);const added=fish[fish.length-1];if(!FishAvoid.prepare(added,0,state.level,bedHeight())){fish.pop();if(!quiet)notify('Không đủ vùng nước trống cho cá. Thu nhỏ hoặc dời bớt đồ trang trí.')}
  updateFishUI();
 }
-function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=minimumWater();$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
-function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);updateFishUI()}
+function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=minimumWater();$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold','addShark'])$(id).disabled=fish.length>=12}
+function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);addFish('shark',true);updateFishUI()}
 function updateFish(dt){const habitat={night:state.night,fish,plants:decorations.filter(o=>DECOR_ITEMS.find(i=>i.id===o.type)?.category==='plant').map(o=>({...o,h:Math.min(o.width*DECOR_ITEMS.find(i=>i.id===o.type).ratio,270)}))};FishAvoid.configure(decorations,DECOR_ITEMS);for(const f of fish)FishAvoid.prepare(f,dt,state.level,bedHeight());Feeding.tick(food,fish,dt,state.level,bedHeight());for(const f of fish){if(f.obstructed)continue;f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt)&&!Feeding.steer(food,f,dt,state.level,bedHeight()))FishMotion.update(f,dt,state.level,Math.random,bedHeight(),habitat)}}
 function drawFishSprite(im,f,xscale,y,alpha){
  const atlas=imgs[f.species+'Swim'];
@@ -122,9 +124,9 @@ $('sound').onclick=async()=>{try{if(!audioCtx){const AC=window.AudioContext||win
 $('reset').onclick=()=>{fish=[];Feeding.clear(food,fish);food.eaten=0;updateFishUI();state.level=state.target=0;state.bed='none';particles=[];ripples=[];document.querySelectorAll('[data-bed]').forEach(x=>x.classList.toggle('active',x.dataset.bed==='none'));notify('Đã trả hồ về trạng thái trống.')};
 document.addEventListener('visibilitychange',()=>{if(audioCtx){if(document.hidden)audioCtx.suspend();else if(state.sound)audioCtx.resume()}last=performance.now()});
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){state.paused=true;$('pause').textContent='Bật hiệu ứng'}
-$('addBlue').onclick=()=>addFish('blue');$('addGold').onclick=()=>addFish('gold');
+$('addShark').onclick=()=>addFish('shark');$('addBlue').onclick=()=>addFish('blue');$('addGold').onclick=()=>addFish('gold');
 $('clearFish').onclick=()=>{fish=[];updateFishUI();notify('Đã đưa cá ra; có thể xả nước.')};
 $('demoFish').onclick=()=>{sampleFish();notify('Đã thả '+fish.length+' cá vào vùng nước còn trống.')};
 
 
-$('testTurn').onclick=()=>{fish.forEach(f=>f.turn=1);notify('Đang thử 6 góc quay đầu của cả hai loài.')}
+$('testTurn').onclick=()=>{fish.forEach(f=>f.turn=1);notify('Đang thử 6 góc quay đầu của cả ba loài.')}
