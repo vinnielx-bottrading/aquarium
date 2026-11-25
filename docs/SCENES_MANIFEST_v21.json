@@ -1,0 +1,19 @@
+{
+  "version": 21,
+  "source": "Built-in Imagegen",
+  "assets": [
+    "mountainDay",
+    "mountainNight",
+    "oceanDay",
+    "oceanNight",
+    "everestDay",
+    "everestNight"
+  ],
+  "status": "integrated",
+  "lighting": "forest-light.js; whole tank composite",
+  "limitations": [
+    "Static backgrounds",
+    "Artistic grading",
+    "Browser visual QA pending"
+  ]
+}

@@ -143,14 +143,14 @@
     "id": "C01",
     "name": "Cá Ngọc Lam",
     "status": "prototype",
-    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",
+    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay. v20: đã tích hợp tập tính riêng, tầng nước ưu tiên mềm và nhịp hoạt động ngày/đêm; xem README.",
     "cycle": 0
   },
   {
     "id": "C02",
     "name": "Cá Đuôi Nắng",
     "status": "prototype",
-    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay.",
+    "note": "v12: bơi ngẫu nhiên theo mục tiêu, dừng nghỉ, lên/xuống, đổi hướng giữa hồ; giữ sprite bơi/quay. v20: đã tích hợp tập tính riêng, tầng nước ưu tiên mềm và nhịp hoạt động ngày/đêm; xem README.",
     "cycle": 0
   },
   {
@@ -478,22 +478,22 @@
   {
     "id": "S02",
     "name": "Thung lũng núi",
-    "status": "prototype",
-    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
+    "status": "ready",
+    "note": "v21: Đã tích hợp ảnh nền ngày/đêm chính thức và ánh sáng toàn hồ.",
     "cycle": 3
   },
   {
     "id": "S03",
     "name": "Đài quan sát đại dương",
-    "status": "prototype",
-    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
+    "status": "ready",
+    "note": "v21: Đã tích hợp ảnh nền ngày/đêm chính thức và ánh sáng toàn hồ.",
     "cycle": 4
   },
   {
     "id": "S04",
     "name": "Trạm kính Everest",
-    "status": "prototype",
-    "note": "v19: Vẫn là phác thảo Canvas. Sáu ảnh ngày/đêm chưa tạo được do hạn mức Imagegen; chưa hoàn tất ánh sáng chính thức.",
+    "status": "ready",
+    "note": "v21: Đã tích hợp ảnh nền ngày/đêm chính thức và ánh sáng toàn hồ.",
     "cycle": 5
   },
   {

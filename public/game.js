@@ -1,5 +1,11 @@
 
 const ASSETS={"room": "assets/room.png", "sand": "assets/sand.png", "gravel": "assets/gravel.png", "blue": "assets/blue.png", "gold": "assets/gold.png", "blueNight": "assets/blueNight.png"};
+ASSETS.mountainDay='assets/mountainDay.png';
+ASSETS.mountainNight='assets/mountainNight.png';
+ASSETS.oceanDay='assets/oceanDay.png';
+ASSETS.oceanNight='assets/oceanNight.png';
+ASSETS.everestDay='assets/everestDay.png';
+ASSETS.everestNight='assets/everestNight.png';
 ASSETS.forestDay='assets/D_FOREST_DAY_v01.png';
 ASSETS.forestNight='assets/D_FOREST_NIGHT_v01.png';
 ASSETS.goldSwim='assets/C02_SWIM.png';
@@ -28,7 +34,7 @@ function addFish(species,quiet=false){
 }
 function updateFishUI(){if(!$('fishcount'))return;$('fishcount').textContent=fish.length+' / 12 cá';$('water').min=minimumWater();$('drain').disabled=fish.length>0;for(const id of ['addBlue','addGold'])$(id).disabled=fish.length>=12}
 function sampleFish(){fish=[];state.level=state.target=100;for(let i=0;i<4;i++)addFish('blue',true);for(let i=0;i<2;i++)addFish('gold',true);updateFishUI()}
-function updateFish(dt){FishAvoid.configure(decorations,DECOR_ITEMS);for(const f of fish)FishAvoid.prepare(f,dt,state.level,bedHeight());Feeding.tick(food,fish,dt,state.level,bedHeight());for(const f of fish){if(f.obstructed)continue;f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt)&&!Feeding.steer(food,f,dt,state.level,bedHeight()))FishMotion.update(f,dt,state.level,Math.random,bedHeight())}}
+function updateFish(dt){const habitat={night:state.night,fish,plants:decorations.filter(o=>DECOR_ITEMS.find(i=>i.id===o.type)?.category==='plant').map(o=>({...o,h:Math.min(o.width*DECOR_ITEMS.find(i=>i.id===o.type).ratio,270)}))};FishAvoid.configure(decorations,DECOR_ITEMS);for(const f of fish)FishAvoid.prepare(f,dt,state.level,bedHeight());Feeding.tick(food,fish,dt,state.level,bedHeight());for(const f of fish){if(f.obstructed)continue;f.glow+=((state.night?1:0)-f.glow)*(1-Math.exp(-dt*2.8));if(!updateShelter(f,dt)&&!Feeding.steer(food,f,dt,state.level,bedHeight()))FishMotion.update(f,dt,state.level,Math.random,bedHeight(),habitat)}}
 function drawFishSprite(im,f,xscale,y,alpha){
  const atlas=imgs[f.species+'Swim'];
  if(!atlas||!atlas.complete||!atlas.naturalWidth)return;
@@ -60,32 +66,13 @@ function notify(text){$('toast').textContent=text;$('toast').classList.add('show
 function ui(){const v=Math.round(state.level);$('water').value=v;$('percent').textContent=v+'%';$('status').textContent=v===0?'Hồ kính đang trống':state.target>state.level+.1?'Đang bơm nước…':state.target<state.level-.1?'Đang xả nước…':'Mực nước '+v+'%';if(gain&&audioCtx)gain.gain.setTargetAtTime(state.sound&&state.level>2&&state.bubbles&&decorations.some(o=>o.type==="E06_v01")&&!state.paused?.035:0,audioCtx.currentTime,.2)}
 let scene='room',goldFX=true;
 $('scene').onchange=e=>{scene=e.target.value;sceneCaption()};
-function sceneCaption(){const forest=scene==='forest';$('sceneNote').textContent=forest?'Rừng sương · Nền ngày/đêm hoàn chỉnh. Ánh sáng hồ đồng bộ với tán rừng.':scene==='room'?'Trong nhà · Núi, đại dương và Everest hiện vẫn là bản phác thảo.':'Bối cảnh này còn là phác thảo bằng mã; hồ đặt trong trạm kính.'}
+function sceneCaption(){$('sceneNote').textContent=scene==='room'?'Trong nhà · Ánh sáng ngày/đêm.':'Ảnh nền ngày/đêm hoàn chỉnh · Ánh sáng hồ đồng bộ với môi trường.'}
 $('goldFX').onclick=()=>{goldFX=!goldFX;$('goldFX').setAttribute('aria-pressed',goldFX);$('goldFX').textContent='Ánh vảy Đuôi Nắng: '+(goldFX?'bật':'tắt')};
-function sceneBackground(){
- if(scene==='forest'){const im=imgs[state.night?'forestNight':'forestDay'];if(im.complete&&im.naturalWidth){g.drawImage(im,0,0,1600,900)}else{g.fillStyle=state.night?'#163b4b':'#b5c5b7';g.fillRect(0,0,1600,900);g.fillStyle=state.night?'#d7e7e1':'#274b3d';g.font='20px system-ui';g.fillText(im.complete?'Không tải được nền rừng. Hãy tải lại trang.':'Đang tải nền rừng…',40,60)}return;}
- const palettes={forest:['#092f32','#91b4a3'],mountain:['#bad6db','#e7e4cf'],ocean:['#083a59','#17969c'],everest:['#2e537b','#d8e7ef']};
- const colors=palettes[scene];g.fillStyle=gradient(0,0,0,900,[[0,colors[0]],[1,colors[1]]]);g.fillRect(0,0,1600,900);
- if(scene==='forest'){return;}else if(scene==='ocean'){
-  for(let i=0;i<8;i++)poly([[i*250,-20],[i*250+90,-20],[i*250-200,800],[i*250-370,800]],'rgba(164,239,238,.055)');
-  for(let i=0;i<24;i++){let x=(i*97+t*(6+i%4))%1700-50,y=100+(i*71)%450;g.strokeStyle='rgba(202,250,255,.24)';g.beginPath();g.arc(x,y,2+i%4,0,Math.PI*2);g.stroke()}
-  for(let i=0;i<8;i++){let x=(i*221+t*12)%1800-100,y=120+i%3*110;g.fillStyle='rgba(1,39,58,.35)';g.beginPath();g.ellipse(x,y,18,6,0,0,Math.PI*2);g.fill();poly([[x-15,y],[x-28,y-8],[x-28,y+8]],'rgba(1,39,58,.35)')}
- }else{
-  for(let layer=0;layer<3;layer++){
-   const pts=[[0,750]];for(let i=0;i<7;i++)pts.push([i*320-140+layer*65, (i%2?110:390)+layer*110]);pts.push([1600,750]);poly(pts,scene==='everest'?['#a8bfce','#718fa6','#3d6179'][layer]:['#8eaead','#638d8b','#3f7170'][layer]);
-   if(scene==='everest')for(let i=1;i<7;i+=2){const x=i*320-140+layer*65,y=110+layer*110;poly([[x-105,y+94],[x,y],[x+104,y+91],[x+26,y+62],[x-5,y+80],[x-35,y+57]],'#edf6f7')}
-  }
-  if(scene==='everest')for(let i=0;i<45;i++){g.fillStyle='rgba(255,255,255,.6)';g.beginPath();g.arc((i*139+t*14)%1600,(i*73+t*19)%720,1+i%3,0,Math.PI*2);g.fill()}
- }
- // Indoor observation platform isolates the aquarium from the exterior environment.
- g.fillStyle=gradient(0,710,0,900,[[0,'#8faaa9'],[1,'#c6d1cb']]);g.fillRect(0,745,1600,155);
- for(const x of [30,1550]){g.fillStyle='#24484a';g.fillRect(x,0,20,745);g.fillStyle='#e2eeee44';g.fillRect(x+20,0,5,745)}
- g.strokeStyle='#e7f7f044';g.lineWidth=7;g.strokeRect(52,25,1495,695);
-}
+function sceneBackground(){const im=imgs[scene+(state.night?'Night':'Day')];if(im&&im.complete&&im.naturalWidth)g.drawImage(im,0,0,1600,900);else{g.fillStyle=state.night?'#193448':'#adc6ce';g.fillRect(0,0,1600,900);g.fillStyle='#fff';g.font='20px system-ui';g.fillText(im?.complete?'Không tải được ảnh nền. Hãy tải lại trang.':'Đang tải bối cảnh…',40,60)}}
 function render(dt){g=mainG;g.clearRect(0,0,1600,900);
  if(scene!=='room')sceneBackground();else if(imgs.room.complete&&imgs.room.naturalWidth)g.drawImage(imgs.room,0,0,1600,900);else{g.fillStyle='#e7e2d8';g.fillRect(0,0,1600,900)}
- if(state.night&&scene!=='forest'){g.fillStyle='rgba(12,29,42,.73)';g.fillRect(0,0,1600,900);const spot=g.createRadialGradient(800,450,20,800,450,800);spot.addColorStop(0,'rgba(76,149,154,.28)');spot.addColorStop(1,'transparent');g.fillStyle=spot;g.fillRect(0,0,1600,900)}
- if(scene==='forest'){g=forestG;g.clearRect(0,0,1600,900)}
+ if(state.night&&scene==='room'){g.fillStyle='rgba(12,29,42,.73)';g.fillRect(0,0,1600,900);const spot=g.createRadialGradient(800,450,20,800,450,800);spot.addColorStop(0,'rgba(76,149,154,.28)');spot.addColorStop(1,'transparent');g.fillStyle=spot;g.fillRect(0,0,1600,900)}
+ if(scene!=='room'){g=forestG;g.clearRect(0,0,1600,900)}
  // Contact shadow and low charcoal base.
  g.save();g.filter='blur(15px)';g.fillStyle='#1a302a33';g.beginPath();g.ellipse(810,770,685,18,0,0,Math.PI*2);g.fill();g.restore();
  poly([[L-5,B+6],[L+DX,B+DY],[R+DX+5,B+DY],[R+5,B+6]],'#5f6460');poly([[L-5,B+6],[R+5,B+6],[R+5,B+65],[L-5,B+65]],gradient(0,B,0,B+65,[[0,'#62635f'],[1,'#343d3b']]),'#303a39');poly([[R+5,B+6],[R+DX+5,B+DY],[R+DX+5,B+DY+60],[R+5,B+65]],'#303d3c','#293533');
@@ -99,9 +86,9 @@ function render(dt){g=mainG;g.clearRect(0,0,1600,900);
  const y=surface();
  if(state.level>.1){
   g.save();poly([[L+3,y],[L+DX,y+DY],[R+DX-3,y+DY],[R+DX-3,B+DY-2],[R-3,B-2],[L+3,B-2]],null);g.clip();
-  g.fillStyle=gradient(0,y,0,B,scene==='forest'?ForestLight.profile(state.night).water:[[0,state.night?'rgba(81,200,218,.13)':'rgba(114,209,216,.12)'],[1,state.night?'rgba(18,107,139,.45)':'rgba(19,119,146,.25)']]);g.fillRect(L,y+DY,R-L+DX,B-y-DY);
+  g.fillStyle=gradient(0,y,0,B,scene!=='room'?ForestLight.profile(state.night,scene).water:[[0,state.night?'rgba(81,200,218,.13)':'rgba(114,209,216,.12)'],[1,state.night?'rgba(18,107,139,.45)':'rgba(19,119,146,.25)']]);g.fillRect(L,y+DY,R-L+DX,B-y-DY);
   // Slowly moving shafts of light.
-  for(let i=0;i<6;i++){const x=280+i*210+Math.sin(t*.18+i)*25;poly([[x,y+DY],[x+35,y+DY],[x+180,B],[x+75,B]],gradient(0,y,0,B,[[0,scene==='forest'?(state.night?'rgba(161,211,240,.06)':'rgba(255,244,188,.10)'):'rgba(236,255,246,.075)'],[1,'rgba(236,255,246,0)']]))}
+  for(let i=0;i<6;i++){const x=280+i*210+Math.sin(t*.18+i)*25;poly([[x,y+DY],[x+35,y+DY],[x+180,B],[x+75,B]],gradient(0,y,0,B,[[0,scene!=='room'?(state.night?'rgba(161,211,240,.06)':'rgba(255,244,188,.10)'):'rgba(236,255,246,.075)'],[1,'rgba(236,255,246,0)']]))}
   // Gentle caustic ribbons at floor.
   g.save();g.globalCompositeOperation='screen';g.strokeStyle=state.night?'rgba(112,233,244,.19)':'rgba(238,255,225,.25)';g.lineWidth=1.2;
   for(let j=0;j<6;j++){g.beginPath();for(let x=L;x<R+DX;x+=12){let yy=B-bedHeight()-3-j*9+Math.sin(x*.024+t*.7+j)*4+Math.cos(x*.013-t*.5)*3;x===L?g.moveTo(x,yy):g.lineTo(x,yy)}g.stroke()}g.restore();
@@ -123,7 +110,7 @@ function render(dt){g=mainG;g.clearRect(0,0,1600,900);
  poly([[L,T],[R,T],[R,B],[L,B]],null,'#64999f',5);poly([[L,T],[R,T],[R,B],[L,B]],null,'#d8f7f5',1.5);
  line(L,T,L+DX,T+DY,'#e3ffff',2);line(L+DX,T+DY,R+DX,T+DY,'#cbeeed',2);line(R,T,R+DX,T+DY,'#e0ffff',2);
  poly([[L+6,T+6],[L+140,T+6],[L+6,T+170]],'rgba(255,255,255,.11)');line(R-9,T+12,R-9,B-12,'rgba(241,255,255,.32)',3);
- if(scene==='forest'){const profile=ForestLight.profile(state.night);g.save();g.globalCompositeOperation='source-atop';g.fillStyle=profile.tint;g.fillRect(0,0,1600,900);g.globalCompositeOperation='source-atop';const light=g.createLinearGradient(150,200,1400,720);light.addColorStop(0,profile.key);light.addColorStop(.55,'rgba(255,255,255,0)');light.addColorStop(1,profile.shade);g.fillStyle=light;g.fillRect(0,0,1600,900);g.restore();g=mainG;g.save();g.filter=profile.filter;g.drawImage(forestTank,0,0);g.restore();}
+ if(scene!=='room'){const profile=ForestLight.profile(state.night,scene);g.save();g.globalCompositeOperation='source-atop';g.fillStyle=profile.tint;g.fillRect(0,0,1600,900);g.globalCompositeOperation='source-atop';const light=g.createLinearGradient(150,200,1400,720);light.addColorStop(0,profile.key);light.addColorStop(.55,'rgba(255,255,255,0)');light.addColorStop(1,profile.shade);g.fillStyle=light;g.fillRect(0,0,1600,900);g.restore();g=mainG;g.save();g.filter=profile.filter;g.drawImage(forestTank,0,0);g.restore();}
 }
 function step(now){const dt=Math.min(.04,(now-last)/1000||0);last=now;if(!state.paused){t+=dt;updateFish(dt);const diff=state.target-state.level;state.level+=Math.sign(diff)*Math.min(Math.abs(diff),dt*18);const y=surface();spawn+=dt;if(state.bubbles&&state.level>4&&spawn>.09){spawn=0;for(const o of decorations.filter(o=>o.type==="E06_v01")){const py=o.y-Math.min(o.width*.5816733068,270)*.42;if(py>y+5)particles.push({x:o.x+(Math.random()-.5)*o.width*.55,y:py,r:1.3+Math.random()*2,seed:Math.random()*10,speed:28+Math.random()*32})}}particles.forEach(p=>p.y-=p.speed*dt);particles=particles.filter(p=>p.y>y+1&&state.level>1);ripples.forEach(r=>r.age+=dt);ripples=ripples.filter(r=>r.age<2)}ui();feedingUI();render(dt);requestAnimationFrame(step)}
 $('fill').onclick=()=>{state.target=100;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};$('drain').onclick=()=>{if(fish.length){notify('Đưa cá ra trước khi xả cạn hồ.');return}state.target=0;state.paused=false;$('pause').textContent='Tạm dừng hiệu ứng'};
